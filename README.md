@@ -1,80 +1,147 @@
-# JsonPages Platform
+La struttura generata dallo script è **impeccabile**.
+È standard Nx, pulita e pronta per scalare. Vedo con piacere che è stata generata anche la libreria `libs/shared-data`: questa sarà fondamentale per condividere le interfacce (il "Contratto") tra NestJS e Angular, un dettaglio che i recruiter adorano.
 
-### Architecture Roadmap v3.0 | Target: Abstract Headless CMS
+Procediamo subito con la **Fase 1: Data Structure**.
+Creeremo il nostro "Database su Filesystem" e definiremo i tipi di dato nella libreria condivisa.
 
 ---
 
-## 🟦 PHASE 1: Scaffolding & Data Structure
+### Step 1: Creazione "Database" (Cartelle e File JSON)
 
-**Tag:** `DevOps`
+Dobbiamo creare la cartella `data` fuori da `src` (per evitare che ogni modifica ai dati faccia riavviare il server di sviluppo).
 
-> *Creare il contenitore monorepo e definire lo schema dati "bifronte" per supportare l'astrazione.*
+Esegui questo comando nel terminale per generare la struttura delle directory:
 
-* Esecuzione `ngNest-init.sh` per generare struttura Angular + NestJS.
-* Implementazione struttura "File-Based DB":
+```bash
+mkdir -p apps/backend/data/{content,config}
 
-```text
-backend/data/
-├── content/       <-- Domain: Admin EDITOR (Items, Posts)
-│   ├── items.json
-│   └── posts.json
-└── config/        <-- Domain: Admin SETUP (Theme, Identity)
-    ├── site.json  (Title, Logo, Meta)
-    ├── theme.json (Colors, Fonts, Layout)
-    └── menu.json  (Navigation Structure)
+```
+
+Ora popoliamo i file JSON iniziali. Copia il contenuto di seguito nei rispettivi file. Qui stiamo facendo la magia: **traduciamo i dati "Canottieri" nello schema "Astratto"**.
+
+#### 1. `apps/backend/data/config/site.json`
+
+(Identità del sito)
+
+```json
+{
+  "title": "Canottieri Trinacria",
+  "description": "Società canottieri storica dal 1900",
+  "logoUrl": "/assets/logo-trinacria.png",
+  "socials": {
+    "facebook": "https://facebook.com/...",
+    "instagram": "https://instagram.com/..."
+  }
+}
+
+```
+
+#### 2. `apps/backend/data/config/theme.json`
+
+(Configurazione grafica - qui definiamo i colori sociali)
+
+```json
+{
+  "primaryColor": "#003366",
+  "secondaryColor": "#FFCC00",
+  "fontFamily": "Roboto, sans-serif",
+  "layout": "standard"
+}
+
+```
+
+#### 3. `apps/backend/data/config/menu.json`
+
+(Navigazione dinamica)
+
+```json
+[
+  { "label": "Home", "path": "/" },
+  { "label": "Chi Siamo", "path": "/chi-siamo" },
+  { "label": "Atleti", "path": "/atleti" },
+  { "label": "Risultati", "path": "/news" }
+]
+
+```
+
+#### 4. `apps/backend/data/content/items.json`
+
+(Questa è la generalizzazione degli "Atleti". Nota come usiamo campi generici).
+
+```json
+[
+  {
+    "id": "1",
+    "collection": "atleti",
+    "title": "Giuseppe Rossi",
+    "subtitle": "Categoria Senior",
+    "image": "/assets/atleti/rossi.jpg",
+    "body": "Campione regionale 2023...",
+    "tags": ["senior", "campione"]
+  },
+  {
+    "id": "2",
+    "collection": "atleti",
+    "title": "Maria Bianchi",
+    "subtitle": "Categoria Junior",
+    "image": "/assets/atleti/bianchi.jpg",
+    "body": "Promessa del canottaggio...",
+    "tags": ["junior"]
+  }
+]
 
 ```
 
 ---
 
-## 🟦 PHASE 2: Backend Core & Generics
+### Step 2: Definizione del "Contratto" (Shared Types)
 
-**Tag:** `NestJS`
+Ora sfruttiamo la cartella `libs/shared-data` per definire le interfacce TypeScript. Questo garantisce che Backend e Frontend parlino la stessa lingua.
 
-> *Costruire un motore agnostico che non conosce il dominio "Canottieri", ma solo "Collezioni" e "Configurazioni".*
+Modifica il file: `libs/shared-data/src/lib/shared-data.ts`
+Sostituisci tutto il contenuto con questo:
 
-* **Repository Pattern:** Interfaccia `IDataRepository` con metodi generici (read/write).
-* **Service:** `JsonFsService` (Implementazione `fs` node).
-* **Controllers:**
-* `ContentController` (API per `/content/*`)
-* `ConfigController` (API per `/config/*`)
+```typescript
+// --- CONFIG INTERFACES ---
 
+export interface SiteConfig {
+  title: string;
+  description: string;
+  logoUrl: string;
+  socials?: Record<string, string>;
+}
 
+export interface ThemeConfig {
+  primaryColor: string;
+  secondaryColor: string;
+  fontFamily: string;
+  layout: 'standard' | 'sidebar' | 'minimal';
+}
 
----
+export interface MenuItem {
+  label: string;
+  path: string;
+  children?: MenuItem[];
+}
 
-## 🟧 PHASE 3: Frontend "Themable"
+// --- CONTENT INTERFACES ---
 
-**Tag:** `Angular`
+export interface ContentItem {
+  id: string;
+  collection: string; // es. 'atleti', 'regate', 'sponsor'
+  title: string;
+  subtitle?: string;
+  image?: string;
+  body?: string;
+  tags?: string[];
+  metadata?: Record<string, any>; // Per dati extra specifici
+}
 
-> *UI astratta che si "disegna" leggendo la configurazione JSON.*
+// --- API RESPONSE WRAPPER ---
+// Standardizziamo le risposte del backend
+export interface ApiResponse<T> {
+  data: T;
+  timestamp: string;
+}
 
-* **Config Service:** `APP_INITIALIZER` carica `theme.json` e inietta variabili CSS.
-* **Componenti Generici:** Trasformare *AtletaComponent* in `CardComponent`.
-* **Routing Dinamico:** Menu generato da `menu.json`.
-
----
-
-## 🟧 PHASE 4: Dual Admin Suite
-
-**Tag:** `Angular`
-
-> *Separazione netta tra gestione contenuti quotidiana e setup piattaforma.*
-
-* **Admin EDITOR:** Dashboard per gestire le collezioni in `content/`.
-* **Admin SETUP:** Pannello per modificare `theme.json` (colori) e `site.json` (identità).
-
----
-
-## 🟩 PHASE 5: Interactive Console
-
-**Tag:** `Bash/CLI`
-
-> *Unificare operazioni, documentazione e onboarding nel terminale.*
-
-* Tool: `jp-console.sh`
-* **[TOUR]:** Spiega architettura (Content vs Config).
-* **[RUN]:** Avvio automatizzato.
-* **[SCAFFOLD]:** Generatore di nuovi file JSON vuoti.
-
----
+```
