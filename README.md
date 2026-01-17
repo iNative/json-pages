@@ -78,13 +78,3 @@ backend/data/
 * **[SCAFFOLD]:** Generatore di nuovi file JSON vuoti.
 
 ---
-
-### STATUS: **READY TO INIT**
-
-*Awaiting execution of ngNest-init.sh*
-
----
-
-### Prossimo step suggerito
-
-Visto che abbiamo appena configurato il repo Git, vuoi che crei questo file direttamente nel tuo sistema con un comando, oppure procediamo con la creazione dello script `ngNest-init.sh` menzionato nella Fase 1?
