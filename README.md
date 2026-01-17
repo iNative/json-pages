@@ -1,96 +1,90 @@
-# JsonPages
+# JsonPages Platform
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+### Architecture Roadmap v3.0 | Target: Abstract Headless CMS
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+---
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 🟦 PHASE 1: Scaffolding & Data Structure
 
-## Run tasks
+**Tag:** `DevOps`
 
-To run tasks with Nx use:
+> *Creare il contenitore monorepo e definire lo schema dati "bifronte" per supportare l'astrazione.*
 
-```sh
-npx nx <target> <project-name>
+* Esecuzione `ngNest-init.sh` per generare struttura Angular + NestJS.
+* Implementazione struttura "File-Based DB":
+
+```text
+backend/data/
+├── content/       <-- Domain: Admin EDITOR (Items, Posts)
+│   ├── items.json
+│   └── posts.json
+└── config/        <-- Domain: Admin SETUP (Theme, Identity)
+    ├── site.json  (Title, Logo, Meta)
+    ├── theme.json (Colors, Fonts, Layout)
+    └── menu.json  (Navigation Structure)
+
 ```
 
-For example:
+---
 
-```sh
-npx nx build myproject
-```
+## 🟦 PHASE 2: Backend Core & Generics
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+**Tag:** `NestJS`
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+> *Costruire un motore agnostico che non conosce il dominio "Canottieri", ma solo "Collezioni" e "Configurazioni".*
 
-## Add new projects
+* **Repository Pattern:** Interfaccia `IDataRepository` con metodi generici (read/write).
+* **Service:** `JsonFsService` (Implementazione `fs` node).
+* **Controllers:**
+* `ContentController` (API per `/content/*`)
+* `ConfigController` (API per `/config/*`)
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
 
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
-```
 
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
+---
 
-```sh
-# Generate an app
-npx nx g @nx/react:app demo
+## 🟧 PHASE 3: Frontend "Themable"
 
-# Generate a library
-npx nx g @nx/react:lib some-lib
-```
+**Tag:** `Angular`
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+> *UI astratta che si "disegna" leggendo la configurazione JSON.*
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+* **Config Service:** `APP_INITIALIZER` carica `theme.json` e inietta variabili CSS.
+* **Componenti Generici:** Trasformare *AtletaComponent* in `CardComponent`.
+* **Routing Dinamico:** Menu generato da `menu.json`.
 
-## Set up CI!
+---
 
-### Step 1
+## 🟧 PHASE 4: Dual Admin Suite
 
-To connect to Nx Cloud, run the following command:
+**Tag:** `Angular`
 
-```sh
-npx nx connect
-```
+> *Separazione netta tra gestione contenuti quotidiana e setup piattaforma.*
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+* **Admin EDITOR:** Dashboard per gestire le collezioni in `content/`.
+* **Admin SETUP:** Pannello per modificare `theme.json` (colori) e `site.json` (identità).
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-### Step 2
+## 🟩 PHASE 5: Interactive Console
 
-Use the following command to configure a CI workflow for your workspace:
+**Tag:** `Bash/CLI`
 
-```sh
-npx nx g ci-workflow
-```
+> *Unificare operazioni, documentazione e onboarding nel terminale.*
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+* Tool: `jp-console.sh`
+* **[TOUR]:** Spiega architettura (Content vs Config).
+* **[RUN]:** Avvio automatizzato.
+* **[SCAFFOLD]:** Generatore di nuovi file JSON vuoti.
 
-## Install Nx Console
+---
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+### STATUS: **READY TO INIT**
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+*Awaiting execution of ngNest-init.sh*
 
-## Useful links
+---
 
-Learn more:
+### Prossimo step suggerito
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Visto che abbiamo appena configurato il repo Git, vuoi che crei questo file direttamente nel tuo sistema con un comando, oppure procediamo con la creazione dello script `ngNest-init.sh` menzionato nella Fase 1?
