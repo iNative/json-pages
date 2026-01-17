@@ -1,10 +1,3 @@
-La struttura generata dallo script è **impeccabile**.
-È standard Nx, pulita e pronta per scalare. Vedo con piacere che è stata generata anche la libreria `libs/shared-data`: questa sarà fondamentale per condividere le interfacce (il "Contratto") tra NestJS e Angular, un dettaglio che i recruiter adorano.
-
-Procediamo subito con la **Fase 1: Data Structure**.
-Creeremo il nostro "Database su Filesystem" e definiremo i tipi di dato nella libreria condivisa.
-
----
 
 ### Step 1: Creazione "Database" (Cartelle e File JSON)
 
