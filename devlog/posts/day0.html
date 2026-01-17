@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JsonPages v3.0 - Roadmap</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-green: #238636;
+            --accent-blue: #58a6ff;
+            --accent-orange: #f78166;
+            --code-bg: #010409;
+            --font-main: 'Segoe UI', Helvetica, Arial, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .phase-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-blue);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .phase-number {
+            background-color: var(--accent-blue);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 6px;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        .phase-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .objective {
+            font-style: italic;
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent-orange);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        li::before {
+            content: "▹";
+            color: var(--accent-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+            color: var(--accent-blue);
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 10px;
+            font-weight: bold;
+            font-family: var(--font-mono);
+        }
+
+        .tag-be { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
+        .tag-fe { background: rgba(247, 129, 102, 0.2); color: var(--accent-orange); }
+        .tag-ops { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+
+        .footer-status {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .blink {
+            animation: blinker 1.5s linear infinite;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>JsonPages Platform</h1>
+            <div class="subtitle">Architecture Roadmap v3.0 | Target: Abstract Headless CMS</div>
+        </header>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="phase-number">PHASE 1</div>
+                <h2 class="phase-title">Scaffolding & Data Structure</h2>
+                <span class="tag tag-ops">DevOps</span>
+            </div>
+            <div class="objective">
+                Create the monorepo container and define the "Dual-Domain" data schema to support abstraction.
+            </div>
+            <ul>
+                <li>Execution of <code>ngNest-init.sh</code> to generate Angular + NestJS structure.</li>
+                <li>Implementation of the "File-Based DB" structure:</li>
+            </ul>
+            <div class="code-block">
+backend/data/
+├── content/       <-- Domain: Admin EDITOR (Items, Posts)
+│   ├── items.json
+│   └── posts.json
+└── config/        <-- Domain: Admin SETUP (Theme, Identity)
+    ├── site.json  (Title, Logo, Meta)
+    ├── theme.json (Colors, Fonts, Layout)
+    └── menu.json  (Navigation Structure)
+            </div>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="phase-number">PHASE 2</div>
+                <h2 class="phase-title">Backend Core & Generics</h2>
+                <span class="tag tag-be">NestJS</span>
+            </div>
+            <div class="objective">
+                Build an agnostic engine that doesn't know the "Team" domain, only "Collections" and "Configurations".
+            </div>
+            <ul>
+                <li><strong>Repository Pattern:</strong> <code>IDataRepository</code> interface with generic methods (read/write).</li>
+                <li><strong>Service:</strong> <code>JsonFsService</code> (Node.js <code>fs</code> implementation).</li>
+                <li><strong>Controllers:</strong> 
+                    <br> - <code>ContentController</code> (API for /content/*)
+                    <br> - <code>ConfigController</code> (API for /config/*)
+                </li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="phase-number">PHASE 3</div>
+                <h2 class="phase-title">Frontend "Themable"</h2>
+                <span class="tag tag-fe">Angular</span>
+            </div>
+            <div class="objective">
+                Abstract UI that "draws itself" by reading the JSON configuration.
+            </div>
+            <ul>
+                <li><strong>Config Service:</strong> <code>APP_INITIALIZER</code> loads <code>theme.json</code> and injects CSS variables.</li>
+                <li><strong>Generic Components:</strong> Transform <em>TeamComponent</em> into <code>CardComponent</code>.</li>
+                <li><strong>Dynamic Routing:</strong> Menu generated from <code>menu.json</code>.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="phase-number">PHASE 4</div>
+                <h2 class="phase-title">Dual Admin Suite</h2>
+                <span class="tag tag-fe">Angular</span>
+            </div>
+            <div class="objective">
+                Clear separation between daily content management and platform setup.
+            </div>
+            <ul>
+                <li><strong>Admin EDITOR:</strong> Dashboard to manage collections in <code>content/</code>.</li>
+                <li><strong>Admin SETUP:</strong> Panel to modify <code>theme.json</code> (colors) and <code>site.json</code> (identity).</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="phase-number">PHASE 5</div>
+                <h2 class="phase-title">Interactive Console</h2>
+                <span class="tag tag-ops">Bash/CLI</span>
+            </div>
+            <div class="objective">
+                Unify operations, documentation, and onboarding in the terminal.
+            </div>
+            <ul>
+                <li>Tool: <code>jp-console.sh</code></li>
+                <li><strong>[TOUR]:</strong> Explains architecture (Content vs Config).</li>
+                <li><strong>[RUN]:</strong> Automated startup.</li>
+                <li><strong>[SCAFFOLD]:</strong> Empty JSON files generator.</li>
+            </ul>
+        </div>
+
+        <div class="footer-status">
+            STATUS: <span class="blink">READY TO INIT</span><br>
+            Awaiting execution of ngNest-init.sh
+        </div>
+    </div>
+
+</body>
+</html>
