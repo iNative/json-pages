@@ -1,29 +1,27 @@
-
 <div class="container">
   
   <header class="site-header">
-    <img *ngIf="config.site?.logoUrl" [src]="config.site?.logoUrl" alt="Logo" class="logo">
-    
-    <div>
-      <h1 class="site-title">{{ config.site?.title || 'Caricamento Piattaforma...' }}</h1>
-      <p class="site-desc">{{ config.site?.description }}</p>
+    <div class="header-content">
+      <img *ngIf="config.site?.logoUrl" [src]="config.site?.logoUrl" alt="Logo" class="logo">
+      <div>
+        <h1 class="site-title">{{ config.site?.title || 'Loading...' }}</h1>
+        <p class="site-desc">{{ config.site?.description }}</p>
+      </div>
     </div>
+
+    <nav class="main-nav">
+      <ul>
+        <li *ngFor="let item of config.menu">
+          <a [routerLink]="item.path" routerLinkActive="active">
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <h2 class="section-title">In Evidenza</h2>
-    
-    <div class="grid" *ngIf="items$ | async as items; else loading">
-      
-      <app-card *ngFor="let item of items" [item]="item"></app-card>
-
-    </div>
-
-    <ng-template #loading>
-      <div class="loading">
-        <span class="loader">⏳</span> Caricamento contenuti dal backend...
-      </div>
-    </ng-template>
+    <router-outlet></router-outlet>
   </main>
 
 </div>

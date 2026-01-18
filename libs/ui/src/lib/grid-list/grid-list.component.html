@@ -1,0 +1,10 @@
+<div class="grid-container" *ngIf="items.length > 0; else emptyState">
+  <lib-card *ngFor="let item of items" [item]="item"></lib-card>
+</div>
+
+<ng-template #emptyState>
+  <div class="empty-state">
+    <span class="icon">📭</span>
+    <p>Nessun contenuto trovato.</p>
+  </div>
+</ng-template>

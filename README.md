@@ -1,90 +1,81 @@
-# JsonPages Platform
 
-### Architecture Roadmap v3.0 | Target: Abstract Headless CMS
+### 🌟 La Stella Polare
+
+Costruire una piattaforma **Headless CMS File-Based** dove il codice non viene toccato per cambiare contenuti o aspetto, ma si modificano solo file JSON.
 
 ---
 
-## 🟦 PHASE 1: Scaffolding & Data Structure
+### 🗺️ FASE 1: Scaffolding & Architettura Dati (✅ COMPLETATA)
 
-**Tag:** `DevOps`
-
-> *Creare il contenitore monorepo e definire lo schema dati "bifronte" per supportare l'astrazione.*
-
-* Esecuzione `ngNest-init.sh` per generare struttura Angular + NestJS.
-* Implementazione struttura "File-Based DB":
-
+* **Obiettivo:** Creare il contenitore e lo schema dati.
+* **Stato:**
+* ✅ Monorepo Nx inizializzato (`apps/frontend`, `apps/backend`).
+* ✅ Struttura Dati su disco creata:
 ```text
-backend/data/
-├── content/       <-- Domain: Admin EDITOR (Items, Posts)
-│   ├── items.json
-│   └── posts.json
-└── config/        <-- Domain: Admin SETUP (Theme, Identity)
-    ├── site.json  (Title, Logo, Meta)
-    ├── theme.json (Colors, Fonts, Layout)
-    └── menu.json  (Navigation Structure)
+apps/backend/data/
+├── config/        (Dominio "Setup")
+│   ├── menu.json
+│   ├── site.json
+│   └── theme.json
+└── content/       (Dominio "Editor")
+    └── items.json
 
 ```
 
----
 
-## 🟦 PHASE 2: Backend Core & Generics
-
-**Tag:** `NestJS`
-
-> *Costruire un motore agnostico che non conosce il dominio "Canottieri", ma solo "Collezioni" e "Configurazioni".*
-
-* **Repository Pattern:** Interfaccia `IDataRepository` con metodi generici (read/write).
-* **Service:** `JsonFsService` (Implementazione `fs` node).
-* **Controllers:**
-* `ContentController` (API per `/content/*`)
-* `ConfigController` (API per `/config/*`)
+* ✅ Fix infrastruttura Frontend: Risolto problema `zone.js` e configurato Proxy (`proxy.conf.json`).
 
 
 
 ---
 
-## 🟧 PHASE 3: Frontend "Themable"
+### 🏗️ FASE 2: Backend Core (Separation of Concerns) (🚧 IN CORSO)
 
-**Tag:** `Angular`
+* **Obiettivo:** Un backend agnostico con domini separati.
+* **Stato:**
+* ✅ **Service:** `AppService` legge i file JSON.
+* ⚠️ **Refactoring Necessario:** Attualmente usiamo `AppController` per tutto. Dobbiamo separare i domini.
+* 🚧 **Repository:** `json-file.repository.ts` è pronto ma non ancora collegato.
 
-> *UI astratta che si "disegna" leggendo la configurazione JSON.*
 
-* **Config Service:** `APP_INITIALIZER` carica `theme.json` e inietta variabili CSS.
-* **Componenti Generici:** Trasformare *AtletaComponent* in `CardComponent`.
-* **Routing Dinamico:** Menu generato da `menu.json`.
+* **Prossimi Step (Giorno 2):**
+1. **ConfigController:** Spostare la logica di `/api/config/*` in un controller dedicato (Setup Domain).
+2. **ContentController:** Creare il controller per `/api/content/:collection` (Editor Domain) usando il Repository Pattern.
 
----
 
-## 🟧 PHASE 4: Dual Admin Suite
-
-**Tag:** `Angular`
-
-> *Separazione netta tra gestione contenuti quotidiana e setup piattaforma.*
-
-* **Admin EDITOR:** Dashboard per gestire le collezioni in `content/`.
-* **Admin SETUP:** Pannello per modificare `theme.json` (colori) e `site.json` (identità).
 
 ---
 
-## 🟩 PHASE 5: Interactive Console
+### 🎨 FASE 3: Frontend "Themable" (L'Astrazione Visiva) (🚧 IN CORSO)
 
-**Tag:** `Bash/CLI`
+* **Obiettivo:** La UI si adatta dinamicamente al JSON ricevuto **prima** di mostrarsi.
+* **Stato:**
+* ✅ Componenti UI base (`CardComponent`) creati.
+* ✅ Servizio `ConfigService` pronto.
 
-> *Unificare operazioni, documentazione e onboarding nel terminale.*
 
-* Tool: `jp-console.sh`
-* **[TOUR]:** Spiega architettura (Content vs Config).
-* **[RUN]:** Avvio automatizzato.
-* **[SCAFFOLD]:** Generatore di nuovi file JSON vuoti.
+* **Prossimi Step (Giorno 2):**
+1. **APP_INITIALIZER:** Caricare `theme.json` e `site.json` *prima* dell'avvio di Angular per evitare flash grafici.
+2. **GridListComponent:** Creare un componente contenitore generico (non solo la Card singola) per listare qualsiasi collezione.
+3. **Routing Dinamico:** Generare le rotte e il menu leggendo `/api/config/menu`.
 
----
 
-### STATUS: **READY TO INIT**
-
-*Awaiting execution of ngNest-init.sh*
 
 ---
 
-### Prossimo step suggerito
+### 🛠️ FASE 4: I Due Admin (Setup & Editor) (📅 DA FARE)
 
-Visto che abbiamo appena configurato il repo Git, vuoi che crei questo file direttamente nel tuo sistema con un comando, oppure procediamo con la creazione dello script `ngNest-init.sh` menzionato nella Fase 1?
+* **Obiettivo:** Interfacce di gestione separate.
+* **Azioni Future:**
+1. **Admin EDITOR:** Dashboard per gestire le collezioni `content` (CRUD su `items.json`).
+2. **Admin SETUP:** Form per modificare i file `config` (Tema e Identità).
+
+
+
+---
+
+### 📜 FASE 5: Master Log "Interactive Console" (📅 DA FARE)
+
+* **Obiettivo:** Script per automatizzare la creazione di nuove collezioni e il setup.
+
+---

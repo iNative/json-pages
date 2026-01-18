@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@json-pages/shared-data": ["libs/shared-data/src/index.ts"]
+      "@json-pages/shared-data": ["libs/shared-data/src/index.ts"],
+      "@json-pages/ui": ["libs/ui/src/index.ts"],
+      "@json-pages/data-access": ["libs/data-access/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

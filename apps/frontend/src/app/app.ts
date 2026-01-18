@@ -1,30 +1,19 @@
-import 'zone.js';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core'; // Rimosso OnInit
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ContentService } from './services/content.service';
-import { ConfigService } from './services/config.service';
-import { Observable } from 'rxjs';
-import { ContentItem } from '@json-pages/shared-data';
-import { CardComponent } from './components/ui/card.component';
+import 'zone.js'; // Fondamentale per evitare White Screen
+import { ConfigService } from '@json-pages/data-access';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, CardComponent],
+  imports: [RouterModule, CommonModule],
   selector: 'app-root',
-  // 👇 Riferimenti ai file esterni
   templateUrl: './app.html',
   styleUrl: './app.scss' 
 })
-export class App implements OnInit {
-  private contentService = inject(ContentService);
-  
-  // Public perché usato nell'HTML (config.site.title)
+export class App { // Rimosso implements OnInit
+  // ContentService non serve più qui! Lo usa la pagina interna.
   public config = inject(ConfigService);
   
-  items$!: Observable<ContentItem[]>;
-
-  ngOnInit() {
-    this.items$ = this.contentService.getCollection('items');
-  }
+  // Niente più items$ o ngOnInit
 }
