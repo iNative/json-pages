@@ -1,14 +1,20 @@
 import { Route } from '@angular/router';
-// Importiamo la pagina dinamica dalla libreria UI
-import { CollectionPageComponent } from '@json-pages/ui';
+// Importiamo il nuovo motore dalla libreria UI
+import { DynamicPageComponent } from '@json-pages/ui';
 
 export const appRoutes: Route[] = [
-  // 1. Redirect dalla Home (vuota) verso 'atleti'
-  { path: '', redirectTo: 'atleti', pathMatch: 'full' },
-  
-  // 2. Rotta Dinamica: :collection cattura tutto (es. "atleti", "news")
+  // 1. HOME PAGE
+  // Quando il path è vuoto, carichiamo DynamicPage forzando lo slug 'home'
   { 
-    path: ':collection', 
-    component: CollectionPageComponent 
+    path: '', 
+    component: DynamicPageComponent,
+    data: { slug: 'home' } 
+  },
+  
+  // 2. PAGINE GENERICHE (es. /chi-siamo, /contatti)
+  // Il componente leggerà lo slug dall'URL
+  { 
+    path: ':slug', 
+    component: DynamicPageComponent 
   }
 ];

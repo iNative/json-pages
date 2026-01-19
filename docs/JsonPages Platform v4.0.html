@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JsonPages v4.0 - Master Plan</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-green: #238636;
+            --accent-blue: #58a6ff;
+            --accent-orange: #f78166;
+            --accent-purple: #a371f7;
+            --code-bg: #010409;
+            --font-main: 'Segoe UI', Helvetica, Arial, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 10px;
+            font-family: var(--font-mono);
+        }
+
+        .phase-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .icon-purple { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
+        .icon-blue { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
+        .icon-green { background: rgba(35, 134, 54, 0.2); color: var(--accent-green); }
+
+        .phase-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid currentColor;
+            margin-left: auto;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--accent-purple);
+            padding-left: 15px;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px dashed var(--border-color);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+            white-space: pre;
+            color: var(--text-muted);
+        }
+
+        strong { color: var(--text-main); font-weight: 700; }
+        .highlight { color: var(--accent-green); }
+        .highlight-orange { color: var(--accent-orange); }
+
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 10px; position: relative; padding-left: 20px; }
+        li::before { content: "▹"; color: var(--accent-blue); position: absolute; left: 0; }
+
+        .roadmap-step {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.03);
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--border-color);
+        }
+        .step-num { color: var(--accent-purple); font-weight: bold; margin-right: 15px; font-family: var(--font-mono);}
+
+        .diagram-box {
+            background: var(--code-bg);
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>JsonPages Platform v4.0</h1>
+            <div class="subtitle">Piano Architetturale Definitivo | Multi-Tenant Transformation</div>
+        </header>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="icon-box icon-purple">🏛️</div>
+                <h2 class="phase-title">Visione Architetturale</h2>
+                <span class="tech-tag" style="color: var(--accent-purple)">Enterprise</span>
+            </div>
+            <div class="intro-text">
+                Se il tuo obiettivo è <strong>JsonPages Platform</strong> (un motore riutilizzabile per N siti), l'architettura attuale ha un difetto fatale: <strong>il coupling tra codice e dati</strong>. Attualmente <code>apps/backend</code> sa esattamente dove sono i file. In una piattaforma multi-sito, il codice deve essere agnostico.
+            </div>
+            <p>Per gestire diversi siti con una sola base di codice, dobbiamo ristrutturare il progetto secondo questi tre principi (I 3 Pilastri):</p>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="icon-box icon-blue">1</div>
+                <h2 class="phase-title">La Nuova Struttura Dati ("Il Database")</h2>
+                <span class="tech-tag" style="color: var(--accent-blue)">File System</span>
+            </div>
+            <p><strong>Multi-Tenancy nel File System:</strong> I dati non vivono nella root del backend, ma in "silos" separati per sito. Dobbiamo spostare i dati fuori dalla logica dell'applicazione.</p>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">Struttura Attuale (Monolito):</p>
+            <div class="code-block" style="margin-top: 5px;">/apps/backend/data/
+  ├── content/ (atleti.json)
+  ├── pages/   (home.json)
+  └── config/  (theme.json)</div>
+
+            <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-main);"><strong>Nuova Struttura (Platform):</strong></p>
+            <div class="code-block" style="margin-top: 5px; border-color: var(--accent-green);">/data-store/
+  ├── <span class="highlight-orange">trinacria/</span>          <-- Tenant 1
+  │     ├── config/       (theme.json, site.json)
+  │     ├── pages/        (home.json, chi-siamo.json)
+  │     └── content/      (atleti.json, news.json)
+  │
+  ├── <span class="highlight">studio-legale/</span>      <-- Tenant 2 (Futuro)
+  │     ├── config/
+  │     └── ...
+  │
+  └── shared/             <-- Assets comuni (opzionale)</div>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="icon-box icon-green">2</div>
+                <h2 class="phase-title">Architettura Backend ("Il Core")</h2>
+                <span class="tech-tag" style="color: var(--accent-green)">NestJS</span>
+            </div>
+            <p><strong>Backend "Context-Aware":</strong> L'API non legge <code>home.json</code>, ma legge <code>{site-id}/home.json</code> in base a chi sta chiamando. Il Backend non deve più avere percorsi hardcoded.</p>
+            
+            <h3>Pattern: Scope-Based Repository</h3>
+            <p>Deve implementare un <strong>Middleware</strong> che intercetta la richiesta, capisce per quale sito è, e configura il Repository di conseguenza. Invece di iniettare <code>JsonFileRepository</code> direttamente, useremo i Request Scope.</p>
+            
+            <div class="diagram-box">
+<strong>Flusso della richiesta:</strong>
+
+1. Frontend chiama: <span class="highlight">GET /api/pages/home</span> con Header <span class="highlight-orange">X-Site-ID: trinacria</span>.
+2. <strong>Middleware Backend:</strong> Legge l'header e imposta il contesto (es. <code>basePath = '/data-store/trinacria'</code>).
+3. <strong>Controller:</strong> Chiama il Service.
+4. <strong>Repository:</strong> Usa il <code>basePath</code> del contesto corrente per leggere il file.
+            </div>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header">
+                <div class="icon-box icon-blue">3</div>
+                <h2 class="phase-title">Architettura Frontend ("Il Renderer")</h2>
+                <span class="tech-tag" style="color: var(--accent-blue)">Angular</span>
+            </div>
+            <p><strong>Frontend "White Label":</strong> L'applicazione Angular è un guscio vuoto (Shell) che diventa il sito A o il sito B solo dopo aver scaricato la <code>ThemeConfig</code>.</p>
+            <ul>
+                <li>Non deve contenere <em>nessuna</em> immagine, logo o colore specifico nel codice CSS/HTML statico.</li>
+                <li><strong>Configurazione Runtime:</strong> All'avvio (<code>APP_INITIALIZER</code>), il frontend chiede: "Chi sono?". Il backend risponde con la configurazione del sito.</li>
+                <li><strong>CSS Variables:</strong> Tutto lo styling (colori, font, spaziature) deve essere mappato su variabili CSS (<code>--primary</code>, <code>--hero-height</code>) definite nel <code>theme.json</code>.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+             <div class="phase-header">
+                <div class="icon-box icon-purple">🗺️</div>
+                <h2 class="phase-title">Diagramma Logico</h2>
+            </div>
+            <div class="code-block">
+[User Browser]
+    |
+    v
+[Frontend (White Label)]
+    |-- 1. Load Config (Site-ID) --> [API]
+    |-- 2. Get Page (Site-ID) -----> [API]
+    |
+    v
+[Backend (Platform Core)]
+    |-- [NestJS Gateway]
+    |-- [Tenant Middleware] --> Reads Header 'X-Site-ID'
+    |-- [Generic Repository]
+    |
+    v
+[Data Store (File System)]
+    |-- Route: 'trinacria' --> [Folder: Trinacria]
+    |-- Route: 'studio' -----> [Folder: Studio Legale]
+            </div>
+        </div>
+
+        <div class="phase-card" style="border-color: var(--accent-purple);">
+            <div class="phase-header">
+                <div class="icon-box icon-purple">📅</div>
+                <h2 class="phase-title">Piano di Implementazione</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Se approvi questa visione, ecco come procederemo, passo dopo passo, per non rompere tutto.</p>
+            
+            <div class="roadmap-step">
+                <div><span class="step-num">STEP 1</span> <strong>Ristrutturazione Dati (Refactoring Cartelle)</strong><br>
+                <small>Spostare <code>apps/backend/data</code> in <code>/data-store/trinacria</code> e creare <code>/data-store/demo</code>.</small></div>
+            </div>
+            
+            <div class="roadmap-step">
+                <div><span class="step-num">STEP 2</span> <strong>Astrazione Backend (Multi-Tenancy)</strong><br>
+                <small>Modificare i Repository per ricevere il <code>basePath</code> dinamicamente. Implementare Middleware per header <code>x-site-id</code>.</small></div>
+            </div>
+
+            <div class="roadmap-step">
+                <div><span class="step-num">STEP 3</span> <strong>Astrazione Frontend (Environment)</strong><br>
+                <small>Configurare environment e Interceptor HTTP per inviare sempre l'header <code>x-site-id</code>.</small></div>
+            </div>
+
+            <div class="roadmap-step">
+                <div><span class="step-num">STEP 4</span> <strong>Standardizzazione Ontologia (Shared-Data)</strong><br>
+                <small>Assicurarsi che l'ontologia sia generica per coprire i bisogni di tutti i siti futuri.</small></div>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: var(--text-muted); margin-top: 40px; font-family: var(--font-mono); font-size: 0.9rem;">
+            Questa è la via per una piattaforma Enterprise. Vuoi procedere con lo <strong>STEP 1</strong>?
+        </div>
+
+    </div>
+
+</body>
+</html>

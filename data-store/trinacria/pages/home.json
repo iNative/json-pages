@@ -1,0 +1,60 @@
+{
+  "id": "home",
+  "slug": "home",
+  "meta": {
+    "title": "Canottieri Trinacria - Palermo",
+    "description": "Società Canottieri Trinacria, Stella d'Argento al Merito Sportivo."
+  },
+  "blocks": [
+    {
+      "//": "RIMOSSO IL BLOCCO HEADER: Ora è gestito da MainLayoutComponent",
+      
+      "id": "hero-news",
+      "type": "hero",
+      "data": {
+        "layout": "overlay",
+        "category": "8 Aprile 2024 | Milano - Idroscalo", 
+        "title": "Due ori all’esordio stagionale per la Canottieri Trinacria Palermo",
+        "subtitle": "Chi ben comincia… Inizia in maniera molto positiva la stagione della velocità...",
+        "backgroundImage": "/assets/img/canottieri-trinacria-palermo.jpg",
+        "ctaLabel": "Leggi Articolo",
+        "ctaUrl": "/news/due-ori",
+        "align": "left"
+      },
+      "settings": {
+        "container": "fluid",
+        "cssClass": "text-white overlay-dark", 
+        "paddingTop": "0",
+        "paddingBottom": "0"
+      }
+    },
+    {
+      "id": "about-section",
+      "type": "text", 
+      "data": {
+        "title": "La Canoa è la nostra grande passione.",
+        "content": "<p class='lead'>Dal 1969 la Società Canottieri Trinacria, Stella d'Argento al Merito Sportivo, ha cambiato molte sedi ma la passione è rimasta quella di sempre.</p>"
+      },
+      "settings": {
+        "container": "boxed",
+        "cssClass": "bg-primary-2 text-white text-center py-5",
+        "paddingTop": "4rem",
+        "paddingBottom": "4rem"
+      }
+    },
+    {
+      "id": "athletes-section",
+      "type": "grid",
+      "data": {
+        "sourceCollection": "atleti",
+        "title": "I Nostri Atleti",
+        "limit": 6,
+        "mode": "list" 
+      },
+      "settings": {
+        "container": "boxed",
+        "paddingTop": "3rem"
+      }
+    }
+  ]
+}

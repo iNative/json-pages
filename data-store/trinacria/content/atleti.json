@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "collection": "atleti",
+    "title": "Giuseppe Rossi",
+    "subtitle": "Categoria Senior",
+    "image": "/assets/atleti/rossi.jpg",
+    "body": "Campione regionale 2023...",
+    "tags": ["senior", "campione"]
+  },
+  {
+    "id": "2",
+    "collection": "atleti",
+    "title": "Maria Bianchi",
+    "subtitle": "Categoria Junior",
+    "image": "/assets/atleti/bianchi.jpg",
+    "body": "Promessa del canottaggio...",
+    "tags": ["junior"]
+  }
+]

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ContentItem } from '@json-pages/shared-data';
+import { ContentItem, PageDefinition } from '@json-pages/shared-data'; 
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,9 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class ContentService {
   private http = inject(HttpClient);
-  private apiUrl = '/api/content'; 
+  private apiUrl = '/api'; 
 
   getCollection(collection: string): Observable<ContentItem[]> {
-    return this.http.get<ContentItem[]>(`${this.apiUrl}/${collection}`);
+    return this.http.get<ContentItem[]>(`${this.apiUrl}/content/${collection}`);
+  }
+
+  getPage(slug: string): Observable<PageDefinition> {
+    return this.http.get<PageDefinition>(`${this.apiUrl}/pages/${slug}`);
   }
 }

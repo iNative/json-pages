@@ -1,27 +1,38 @@
 <div class="container">
   
-  <header class="site-header">
-    <div class="header-content">
-      <img *ngIf="config.site?.logoUrl" [src]="config.site?.logoUrl" alt="Logo" class="logo">
-      <div>
-        <h1 class="site-title">{{ config.site?.title || 'Loading...' }}</h1>
-        <p class="site-desc">{{ config.site?.description }}</p>
+  <div *ngIf="config.loading()" style="text-align:center; padding: 50px;">
+    <p>Caricamento sistema...</p>
+  </div>
+
+  <div *ngIf="!config.loading()">
+    
+    <header class="site-header">
+      <div class="header-content">
+        <img *ngIf="config.site?.logoUrl" [src]="config.site?.logoUrl" alt="Logo" class="logo">
+        <div>
+          <h1 class="site-title">{{ config.site?.title }}</h1>
+          <p class="site-desc">{{ config.site?.description }}</p>
+        </div>
       </div>
-    </div>
 
-    <nav class="main-nav">
-      <ul>
-        <li *ngFor="let item of config.menu">
-          <a [routerLink]="item.path" routerLinkActive="active">
-            {{ item.label }}
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+      <nav class="main-nav">
+        <ul>
+          <li *ngFor="let item of config.menu">
+            <a [routerLink]="item.path" routerLinkActive="active">
+              {{ item.label }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    
+    <footer style="margin-top: 50px; border-top: 1px solid #eee; padding: 20px; text-align: center; font-size: 0.8rem; color: #666;">
+        &copy; {{ config.site?.title }} - Powered by JsonPages v3.5
+    </footer>
+  </div>
 
 </div>

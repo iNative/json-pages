@@ -1,37 +1,44 @@
-import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Inject, Scope } from '@nestjs/common'; // Importa Scope e Inject
 import { IContentRepository } from './content.repository.interface';
 import { ContentItem } from '@json-pages/shared-data';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { TenantService } from '../tenant/tenant.service'; // Importa il TenantService
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST }) // 👈 Repository Scoped perché dipende dal Tenant
 export class JsonFileRepository implements IContentRepository {
-  // Percorso assoluto basato sulla root del progetto
-  private readonly basePath = path.join(process.cwd(), 'apps/backend/data/content');
+  
+  constructor(private readonly tenantService: TenantService) {}
+
+  private getBasePath(): string {
+    // Dinamico: /data-store/{tenant}/content
+    return path.join(this.tenantService.basePath, 'content');
+  }
 
   private getFilePath(collection: string): string {
-    return path.join(this.basePath, `${collection}.json`);
+    return path.join(this.getBasePath(), `${collection}.json`);
   }
 
   async findAll(collection: string): Promise<ContentItem[]> {
     try {
       const filePath = this.getFilePath(collection);
-      // Verifica se il file esiste per evitare crash brutali
       try {
         await fs.access(filePath);
       } catch {
-        console.warn(`File non trovato: ${filePath}. Ritorno array vuoto.`);
+        // Se il file non esiste, ritorno array vuoto senza errore
         return [];
       }
-
       const data = await fs.readFile(filePath, 'utf-8');
       return JSON.parse(data) as ContentItem[];
     } catch (error) {
-      console.error(`Errore lettura ${collection}:`, error);
-      throw new InternalServerErrorException(`Errore lettura dati per ${collection}`);
+      console.error(`Errore lettura ${collection} per tenant ${this.tenantService.tenantId}:`, error);
+      throw new InternalServerErrorException(`Errore dati tenant`);
     }
   }
 
+  // ... (Gli altri metodi findById, create, update, delete rimangono uguali nella logica, 
+  // useranno automaticamente findAll/saveFile che usano getFilePath aggiornato)
+  
   async findById(collection: string, id: string): Promise<ContentItem | null> {
     const items = await this.findAll(collection);
     return items.find((item) => item.id === id) || null;
@@ -46,9 +53,10 @@ export class JsonFileRepository implements IContentRepository {
   async update(collection: string, id: string, item: ContentItem): Promise<void> {
     const items = await this.findAll(collection);
     const index = items.findIndex((i) => i.id === id);
-    if (index === -1) throw new NotFoundException(`Item ${id} not found`);
-    items[index] = item;
-    await this.saveFile(collection, items);
+    if (index !== -1) {
+       items[index] = item;
+       await this.saveFile(collection, items);
+    }
   }
 
   async delete(collection: string, id: string): Promise<void> {

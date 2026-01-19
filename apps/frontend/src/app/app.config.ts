@@ -1,26 +1,39 @@
 import { ApplicationConfig, APP_INITIALIZER, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
-import { ConfigService } from '@json-pages/data-access';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { appRoutes } from './app.routes';
+import { tenantInterceptor } from './interceptors/tenant.interceptor';
+import { environment } from '../environments/environment'; // L'App PUÒ importare environment
 
-// 👇 Assicurati di importare appRoutes da QUESTO file locale
-import { appRoutes } from './app.routes'; 
+// 👇 Importa dalla LIB
+import { ConfigService, TenantService, API_URL } from '@json-pages/data-access';
 
-export function initializeApp(configService: ConfigService) {
+export function initTenant(tenantService: TenantService) {
+  return () => tenantService.initialize();
+}
+
+export function initConfig(configService: ConfigService) {
   return () => configService.loadConfig();
 }
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    
-    // 👇 QUI PASSIAMO LA MAPPA AL MOTORE
     provideRouter(appRoutes, withComponentInputBinding()),
+    provideHttpClient(withInterceptors([tenantInterceptor])),
     
-    provideHttpClient(),
+    // 👇 FORNIAMO IL VALORE AL TOKEN
+    { provide: API_URL, useValue: environment.apiUrl },
+
     {
       provide: APP_INITIALIZER,
-      useFactory: initializeApp,
+      useFactory: initTenant,
+      deps: [TenantService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initConfig,
       deps: [ConfigService],
       multi: true
     }
