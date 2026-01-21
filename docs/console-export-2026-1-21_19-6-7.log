@@ -1,0 +1,24 @@
+[vite] connected from window a88e4e4c-689b-40bb-aa4a-29b7d605ed59:67:11
+[vite] new window visibility visible a88e4e4c-689b-40bb-aa4a-29b7d605ed59:63:12
+[vite] new window visibility hidden a88e4e4c-689b-40bb-aa4a-29b7d605ed59:63:12
+[vite] new window visibility visible a88e4e4c-689b-40bb-aa4a-29b7d605ed59:63:12
+[vite] ping successful a88e4e4c-689b-40bb-aa4a-29b7d605ed59:69:12
+Il foglio di stile http://localhost:4200/src/styles.scss non è stato caricato in quanto il suo tipo MIME, “text/html”, non corrisponde a “text/css”. localhost:4200
+[vite] connecting... client:733:9
+[vite] connected. client:827:12
+Download the React DevTools for a better development experience: https://react.dev/link/react-devtools react-dom_client.js:20101:54
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition. react-router-dom.js:4390:13
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath. react-router-dom.js:4390:13
+⚠️ API Resolve fallita, uso default landing TenantContext.tsx:29:19
+🌍 Tenant Attivo: landing TenantContext.tsx:34:15
+🎨 [ThemeLoader] Iniezione asset per: landing 2 useThemeLoader.ts:7:13
+⚠️ API Resolve fallita, uso default landing TenantContext.tsx:29:19
+🌍 Tenant Attivo: landing TenantContext.tsx:34:15
+Caricamento non riuscito per lo <script> con sorgente “http://localhost:4200/api/assets/landing/js/jquery.min.js”. localhost:4200:1:1
+❌ [ThemeLoader] Errore critico: Error: Errore caricamento /api/assets/landing/js/jquery.min.js
+    onerror useThemeLoader.ts:44
+useThemeLoader.ts:46:17
+Caricamento non riuscito per lo <script> con sorgente “http://localhost:4200/api/assets/landing/js/jquery.min.js”. localhost:4200:1:1
+❌ [ThemeLoader] Errore critico: Error: Errore caricamento /api/assets/landing/js/jquery.min.js
+    onerror useThemeLoader.ts:44
+useThemeLoader.ts:46:17

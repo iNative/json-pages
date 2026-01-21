@@ -1,44 +1,31 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'; // 👈 Import Routing
-import { useTenant } from './context/TenantContext';
-import { useThemeLoader } from './hooks/useThemeLoader';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { DynamicPage } from './pages/DynamicPage'; // 👈 Import Pagina
+import { DynamicPage } from './pages/DynamicPage';
 
 export const Shell: React.FC = () => {
-  const { tenantId } = useTenant();
-  const assetsLoaded = useThemeLoader(tenantId);
-
-  // Loader iniziale (Anti-FOUC)
-  if (!assetsLoaded) {
-    return (
-      <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div className="spinner-border text-primary" role="status">
-          <span className="sr-only">Caricamento Tema...</span>
-        </div>
-      </div>
-    );
-  }
+  // Rimosso useThemeLoader e il blocco condizionale (spinner)
+  // Ora il rendering è immediato e gestito dai componenti React nativi
 
   return (
-    <div className="fade-page d-flex flex-column min-vh-100">
-       
+    <div className="fade-page flex flex-col min-h-screen">
+       {/* Header Shadcn */}
        <Header />
 
-       {/* Il Main ora contiene le Rotte Dinamiche */}
+       {/* Main Content Area */}
        <main className="flex-grow-1">
           <Routes>
-             {/* 1. Rotta Home Page (path vuoto) */}
+             {/* Rotta Home Page */}
              <Route path="/" element={<DynamicPage />} />
              
-             {/* 2. Rotta Generica (cattura qualsiasi slug come /chi-siamo, /atleti) */}
+             {/* Rotta Dinamica per slug (es. /architecture, /features) */}
              <Route path="/:slug" element={<DynamicPage />} />
           </Routes>
        </main>
        
+       {/* Footer Shadcn */}
        <Footer />
-       
     </div>
   );
 };

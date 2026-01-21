@@ -1,61 +1,65 @@
 import React from 'react';
-import { useHeader } from './Header.hooks'; // 👈 Importiamo solo l'hook
+import { useHeader } from './Header.hooks';
+import { Layers, Menu, X, Github } from 'lucide-react';
 
 export const Header: React.FC = () => {
-  // Una sola riga per connettere la logica
-  const { site, menu, isMobileMenuOpen, toggleMobileMenu, logoUrl } = useHeader();
+  const { site, menu, toggleMobileMenu, isMobileMenuOpen } = useHeader();
+  const safeMenu = Array.isArray(menu) ? menu : [];
 
   return (
-    <header className="site-header py-3 shadow-sm bg-white sticky-top">
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light px-0">
-          
-          {/* LOGO */}
-          <a className="navbar-brand fade-page" href="/">
-            {logoUrl ? (
-              <img 
-                src={logoUrl} 
-                alt={site?.title || 'Logo'} 
-                height="50"
-                className="d-inline-block align-top"
-                style={{ maxHeight: '50px', width: 'auto' }}
-              />
-            ) : (
-              <span className="h4 mb-0 font-weight-bold">{site?.title}</span>
-            )}
+    // header css: border-bottom: 1px solid var(--border); padding-bottom: 4rem; margin-bottom: 4rem;
+    <header className="w-full border-b border-site-border mb-16 pb-8 pt-8">
+      <div className="container flex items-center justify-between">
+        
+        {/* LOGO: font-weight 700, gap 12px */}
+        <a href="/" className="flex items-center gap-3 text-2xl font-bold tracking-tight text-white hover:text-site-accent transition-colors">
+          <Layers className="h-6 w-6 text-site-accent" />
+          <span>{site?.title || 'JsonPages'}</span>
+        </a>
+
+        {/* DESKTOP NAV */}
+        <nav className="hidden md:flex items-center">
+          <a 
+            href="https://github.com/inative/json-pages" 
+            target="_blank" 
+            rel="noreferrer"
+            className="ml-8 text-base font-medium text-site-text-sec hover:text-white transition-colors flex items-center gap-2"
+          >
+             <Github className="h-5 w-5" /> GitHub
           </a>
 
-          {/* MOBILE TOGGLER */}
-          <button 
-            className="navbar-toggler" 
-            type="button" 
-            onClick={toggleMobileMenu}
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          {/* MENU ITEMS */}
-          <div className={`collapse navbar-collapse justify-content-end ${isMobileMenuOpen ? 'show' : ''}`}>
-            <ul className="navbar-nav align-items-center">
-              {menu.map((item, index) => (
-                <li key={index} className="nav-item">
-                  <a href={item.path} className="nav-link px-3 font-weight-bold text-uppercase text-dark">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-              
-              <li className="nav-item ml-lg-3 mt-3 mt-lg-0">
-                <a href="/contatti" className="btn btn-primary rounded-pill px-4 text-white">
-                  Contattaci
-                </a>
-              </li>
-            </ul>
-          </div>
-
+          {safeMenu.map((item, index) => (
+            <a 
+              key={index} 
+              href={item.path} 
+              className="ml-8 text-base font-medium text-site-text-sec hover:text-white transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
+
+        {/* MOBILE TOGGLE */}
+        <button className="md:hidden text-site-text-sec" onClick={toggleMobileMenu}>
+          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
+
+      {/* MOBILE MENU */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden mt-4 border-t border-site-border py-4 container">
+          {safeMenu.map((item, index) => (
+            <a 
+              key={index} 
+              href={item.path}
+              className="block py-2 text-site-text-sec hover:text-white"
+              onClick={toggleMobileMenu}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
     </header>
   );
 };

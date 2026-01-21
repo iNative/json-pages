@@ -11,16 +11,15 @@ export class TenantMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const headerValue = req.headers['x-site-id'] as string;
     
-    // Logica di fallback
-    const tenantId = headerValue || 'trinacria';
+    // 👇 MODIFICA QUI: Fallback su 'default'
+    const tenantId = headerValue || 'default'; 
     
-    // Imposta il servizio
     this.tenantService.setTenant(tenantId);
     
-    // 👇 LOG DI DIAGNOSTICA (Cosa sta succedendo?)
-    this.logger.warn(`🔍 [Middleware] Richiesta: ${req.originalUrl}`);
-    this.logger.warn(`   Header 'x-site-id': ${headerValue ? headerValue : 'NON PRESENTE'}`);
-    this.logger.warn(`   Tenant Deciso: '${tenantId}'`);
+    // Log ridotto per pulizia
+    if (!req.url.includes('assets')) {
+        this.logger.log(`Tenant: ${tenantId} | Path: ${req.url}`);
+    }
     
     next();
   }

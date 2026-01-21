@@ -4,7 +4,7 @@ export function sharedData(): string {
 }
 
 // =========================================================
-// 🏗️ SEZIONE 1: CONFIGURAZIONE CORE & MENU (ESISTENTE)
+// 🏗️ SEZIONE 1: CONFIGURAZIONE CORE & MENU
 // =========================================================
 
 export interface SiteConfig {
@@ -24,12 +24,12 @@ export interface ThemeConfig {
 export interface MenuItem {
   label: string;
   path: string;
-  children?: MenuItem[];     // Supporto per sottomenu
-  target?: '_blank' | '_self'; // Supporto link esterni
+  children?: MenuItem[];
+  target?: '_blank' | '_self';
 }
 
 // =========================================================
-// 📄 SEZIONE 2: CONTENUTI SEMPLICI (ESISTENTE - Legacy)
+// 📄 SEZIONE 2: CONTENUTI SEMPLICI
 // =========================================================
 
 export interface ContentItem {
@@ -41,39 +41,37 @@ export interface ContentItem {
   body?: string;
   tags?: string[];
   metadata?: Record<string, any>;
+  icon?: string;
 }
 
 // =========================================================
-// 🚀 SEZIONE 3: NUOVA ONTOLOGIA "PAGE BUILDER" (NUOVO)
+// 🚀 SEZIONE 3: NUOVA ONTOLOGIA "PAGE BUILDER"
 // =========================================================
 
-// Tipi di Blocchi supportati
-// Aggiunti 'header' e 'footer' come richiesto
-export type BlockType = 'header' | 'hero' | 'grid' | 'text' | 'html' | 'footer';
+// 👇 UNICA DEFINIZIONE DI BLOCKTYPE
+export type BlockType = 'header' | 'hero' | 'grid' | 'text' | 'html' | 'footer' | 'code';
 
-// Definizione Generica di un Blocco (Il Wrapper)
 export interface PageBlock<T = any> {
-  id: string;              // UUID per tracciamento
-  type: BlockType;         // Il "selettore" del componente
-  data: T;                 // Il payload specifico
-  settings?: BlockSettings; // Opzioni di visualizzazione (margini, colori)
+  id: string;
+  type: BlockType;
+  data: T;
+  settings?: BlockSettings;
 }
 
 export interface BlockSettings {
-  container?: 'fluid' | 'boxed'; // Larghezza piena o contenuta
-  paddingTop?: string;    // es. "2rem"
+  container?: 'fluid' | 'boxed';
+  paddingTop?: string;
   paddingBottom?: string;
   backgroundColor?: string;
-  cssClass?: string;      // Classi utility custom (es. 'text-center')
-  hidden?: boolean;       // Toggle visibilità
+  cssClass?: string;
+  hidden?: boolean;
 }
 
-// Definizione della Pagina (Composition)
 export interface PageDefinition {
   id: string;
-  slug: string;           // es. 'home', 'chi-siamo'
-  meta: PageMeta;         // SEO
-  blocks: PageBlock[];    // L'ordine dei componenti
+  slug: string;
+  meta: PageMeta;
+  blocks: PageBlock[];
 }
 
 export interface PageMeta {
@@ -86,70 +84,72 @@ export interface PageMeta {
 // 🧩 SEZIONE 4: INTERFACCE DATI SPECIFICHE PER I BLOCCHI
 // =========================================================
 
-// 1. HEADER (Menu + Logo)
 export interface HeaderBlockData {
-  logoOverride?: string;    // Opzionale: usa un logo diverso da quello globale
-  menuSource: string;       // Quale menu caricare? es. 'main', 'sidebar'
-  style?: 'transparent' | 'solid' | 'inverted'; // Comportamento visuale
-  sticky?: boolean;         // Se deve rimanere fisso in alto
+  logoOverride?: string;
+  menuSource: string;
+  style?: 'transparent' | 'solid' | 'inverted';
+  sticky?: boolean;
 }
 
-// 2. HERO (Banner Potenziato)
 export interface HeroBlockData {
   title: string;
   subtitle?: string;
-  backgroundImage?: string; // Opzionale per il layout split
+  backgroundImage?: string;
   ctaLabel?: string;
   ctaUrl?: string;
   align?: 'left' | 'center' | 'right';
-  
-  // 👇 NUOVI CAMPI PER "BLOGPOST-HERO"
-  date?: string;       // es. "8 Aprile 2024"
-  category?: string;   // es. "Milano - Idroscalo"
-  
-  // 👇 NUOVI CAMPI PER "SPLIT HERO / SPONSOR"
-  layout?: 'overlay' | 'split'; // 'overlay' = testo su immagine, 'split' = testo sx / immagine dx
-  logos?: SponsorLogo[];        // Per la sezione sponsor
+  date?: string;
+  category?: string;
+  layout?: 'overlay' | 'split';
+  logos?: SponsorLogo[];
 }
 
 export interface SponsorLogo {
   src: string;
   alt?: string;
-  width?: string; // es. 'icon-xl' o 'icon-lg' per mappare le classi CSS originali
+  width?: string;
 }
 
-// 3. GRID (Lista dinamica contenuti)
 export interface GridBlockData {
-  sourceCollection: string; // es. 'atleti', 'news'
-  limit?: number;           // Quanti items mostrare
+  title?: string;
+  sourceCollection: string;
+  limit?: number;
   mode?: 'card' | 'list' | 'carousel';
-  filterTags?: string[];    // Filtri pre-applicati
+  filterTags?: string[];
 }
 
-// 4. TEXT / HTML (Contenuto libero)
 export interface HtmlBlockData {
-  content: string; // HTML raw
+  content: string;
 }
 
 export interface TextBlockData {
   title?: string;
-  content: string; // Testo semplice o Markdown
+  content: string;
 }
 
-// 5. FOOTER
 export interface FooterBlockData {
   copyrightText?: string;
   showSocials?: boolean;
   showLogo?: boolean;
-  links?: MenuItem[]; // Link rapidi nel footer (Privacy, Cookie, ecc.)
+  links?: MenuItem[];
+}
+
+// 👇 INTERFACCIA CODE AGGIUNTA
+export interface CodeBlockData {
+  lines: CodeLine[];
+}
+
+export interface CodeLine {
+  type: 'comment' | 'command';
+  text: string;
 }
 
 // =========================================================
-// 🔌 SEZIONE 5: UTILITY API (ESISTENTE)
+// 🔌 SEZIONE 5: UTILITY API
 // =========================================================
 
 export interface ApiResponse<T> {
   data: T;
   timestamp: string;
-  error?: string; // Utile per gestire errori in modo strutturato
+  error?: string;
 }

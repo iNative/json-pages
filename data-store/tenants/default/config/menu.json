@@ -1,0 +1,5 @@
+[
+  { "label": "Architecture", "path": "/architecture" },
+  { "label": "Features", "path": "/features" },
+  { "label": "Docs", "path": "/docs" }
+]

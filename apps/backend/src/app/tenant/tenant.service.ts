@@ -5,10 +5,10 @@ import * as fs from 'fs';
 @Injectable({ scope: Scope.REQUEST })
 export class TenantService {
   private readonly logger = new Logger(TenantService.name);
-  private _tenantId: string = 'trinacria'; 
-  
-  // Usiamo process.cwd() che di solito è la root del workspace
-  private readonly rootDataStore = path.join(process.cwd(), 'data-store');
+  private _tenantId: string = 'default'; // Default fallback
+
+  // 👇 MODIFICA QUI: Aggiunto 'tenants' al percorso base
+  private readonly rootDataStore = path.join(process.cwd(), 'data-store', 'tenants');
 
   setTenant(tenantId: string) {
     this._tenantId = tenantId;
@@ -21,11 +21,9 @@ export class TenantService {
   get basePath(): string {
     const fullPath = path.join(this.rootDataStore, this._tenantId);
     
-    // 👇 LOG DI DIAGNOSTICA (Verifica esistenza cartella)
-    const exists = fs.existsSync(fullPath);
-    this.logger.log(`📂 [TenantService] BasePath: ${fullPath}`);
-    this.logger.log(`   Esiste su disco? ${exists ? '✅ SÌ' : '❌ NO (Controlla path!)'}`);
-
+    // Verifica silenziosa per performance, logga solo se serve debug
+    // const exists = fs.existsSync(fullPath); 
+    
     return fullPath;
   }
 }

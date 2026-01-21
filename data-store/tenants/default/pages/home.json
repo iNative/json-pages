@@ -1,0 +1,62 @@
+{
+  "id": "home",
+  "slug": "home",
+  "meta": {
+    "title": "JsonPages Documentation",
+    "description": "Multi-Tenant Architecture Documentation"
+  },
+  "blocks": [
+    {
+      "id": "hero-1",
+      "type": "hero",
+      "data": {
+        "title": "Multi-Tenant CMS Architecture.",
+        "subtitle": "A unified monorepo powering multiple sites from a single codebase. Featuring a NestJS core and a dynamic, data-driven React frontend.",
+        "category": "v4.3 Release",
+        "align": "left"
+      },
+      "settings": {
+        "paddingTop": "6rem",
+        "paddingBottom": "6rem"
+      }
+    },
+    {
+      "id": "arch-grid",
+      "type": "grid",
+      "data": {
+        "sourceCollection": "architecture",
+        "mode": "card"
+      },
+      "settings": {
+        "container": "boxed",
+        "cssClass": "architecture-section"
+      }
+    },
+    {
+      "id": "feat-grid",
+      "type": "grid",
+      "data": {
+        "sourceCollection": "features",
+        "mode": "card"
+      }
+    },
+    {
+      "id": "quick-start",
+      "type": "code",
+      "data": {
+        "lines": [
+          { "type": "comment", "text": "1. Start the Backend API (Port 3000)" },
+          { "type": "command", "text": "nx serve backend" },
+          { "type": "comment", "text": "2. Start the Public Site (Port 4200)" },
+          { "type": "command", "text": "nx serve public-site" },
+          { "type": "comment", "text": "3. Simulate a tenant via URL" },
+          { "type": "command", "text": "http://localhost:4200/?tenant=demo" }
+        ]
+      },
+      "settings": {
+        "container": "boxed",
+        "paddingBottom": "6rem"
+      }
+    }
+  ]
+}

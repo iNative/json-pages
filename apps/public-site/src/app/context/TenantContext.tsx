@@ -11,7 +11,7 @@ const TenantContext = createContext<TenantState | undefined>(undefined);
 
 // 3. Creiamo il Provider
 export const TenantProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [tenantId, setTenantId] = useState<string>('landing');
+  const [tenantId, setTenantId] = useState<string>('default');
   const [isResolved, setIsResolved] = useState<boolean>(false);
 
   useEffect(() => {

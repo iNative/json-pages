@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "collection": "architecture",
+    "title": "Public Site (React)",
+    "body": "A high-performance React + Vite application. It acts as a headless CMS frontend, dynamically rendering pages and blocks based on JSON configurations fetched from the backend.",
+    "icon": "react" 
+  },
+  {
+    "id": "2",
+    "collection": "architecture",
+    "title": "Core Backend (NestJS)",
+    "body": "The central nervous system. Handles tenant resolution, serves static assets (CSS/Images) via proxy, and provides API endpoints for content retrieval.",
+    "icon": "nodejs"
+  },
+  {
+    "id": "3",
+    "collection": "architecture",
+    "title": "Admin Panel (Angular)",
+    "body": "The legacy frontend, now repurposed as a dedicated back-office interface for content managers to edit JSON files and site settings.",
+    "icon": "angular"
+  }
+]

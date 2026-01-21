@@ -1,88 +1,61 @@
 import React from 'react';
 import { GridBlockData, BlockSettings } from '@json-pages/shared-data';
-import { useCollection } from '../hooks/useCollection'; // 👈 Hook creato nello step 5.1
-import { useTenant } from '../context/TenantContext';
+import { useGridBlock } from './GridBlock.hooks';
+import { Box, Server, Layers, Cpu, Palette, Zap, Terminal, Globe, Layout } from 'lucide-react';
 
-interface Props {
-  data: GridBlockData;
-  settings?: BlockSettings;
-}
+const ICON_MAP: Record<string, React.ElementType> = {
+  'react': Box, 'nodejs': Server, 'angular': Layers, 'bolt': Zap,
+  'palette': Palette, 'cpu': Cpu, 'terminal': Terminal, 'globe': Globe, 'layout': Layout
+};
+
+interface Props { data: GridBlockData; settings?: BlockSettings; }
 
 export const GridBlock: React.FC<Props> = ({ data, settings }) => {
-  const { items, loading } = useCollection(data.sourceCollection);
-  const { tenantId } = useTenant();
-
-  const resolveImg = (url?: string) => {
-    if (!url) return 'https://via.placeholder.com/400x250?text=No+Image';
-    if (url.startsWith('http')) return url;
-    return `/api/assets/${tenantId}/${url.replace(/^\/?assets\//, '')}`;
-  };
-
-  // Applichiamo il limite se definito nel JSON (es. "limit": 6)
-  const displayItems = data.limit ? items.slice(0, data.limit) : items;
+  const { items, loading } = useGridBlock(data, settings);
+  if (loading) return null;
 
   return (
-    <section 
-      className={settings?.cssClass}
-      style={{
-        paddingTop: settings?.paddingTop || '4rem',
-        paddingBottom: settings?.paddingBottom || '4rem',
-        backgroundColor: settings?.backgroundColor
-      }}
-    >
-      <div className={settings?.container === 'fluid' ? 'container-fluid' : 'container'}>
-        
-        {/* Titolo della Sezione (Opzionale, se gestito fuori dal blocco Grid nel JSON) */}
-        {/* <h2 className="mb-5 text-center font-weight-bold">Ultimi Aggiornamenti</h2> */}
-        
-        {loading ? (
-          <div className="text-center py-5">
-            <div className="spinner-border text-primary" role="status"></div>
-            <p className="mt-2 text-muted">Caricamento {data.sourceCollection}...</p>
-          </div>
-        ) : (
-          <div className="row">
-            {displayItems.map(item => (
-              <div key={item.id} className="col-md-4 mb-4">
-                <div className="card h-100 shadow-sm border-0 hover-lift transition">
-                  {item.image && (
-                    <div style={{ height: '220px', overflow: 'hidden' }}>
-                        <img 
-                          src={resolveImg(item.image)} 
-                          className="card-img-top" 
-                          alt={item.title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
-                    </div>
-                  )}
-                  <div className="card-body d-flex flex-column">
-                    {item.tags && item.tags.length > 0 && (
-                        <div className="mb-2">
-                            <span className="badge badge-light text-secondary border mr-1">
-                                {item.tags[0]}
-                            </span>
-                        </div>
-                    )}
-                    <h5 className="card-title font-weight-bold mb-2">{item.title}</h5>
-                    {item.subtitle && <h6 className="card-subtitle mb-3 text-muted small text-uppercase">{item.subtitle}</h6>}
-                    <p className="card-text text-secondary mb-4 flex-grow-1">
-                        {item.body ? item.body.substring(0, 120) + '...' : ''}
-                    </p>
-                    <a href="#" className="font-weight-bold text-primary text-decoration-none stretched-link">
-                        Leggi tutto &rarr;
-                    </a>
-                  </div>
-                </div>
+    <section className="container mb-24">
+      {/* SECTION TITLE: size 1.5rem, margin-bottom 2rem */}
+      {data.title && (
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 text-white">
+             {/* Icona decorativa opzionale se vuoi matchare 'Architecture Stack' con icona */}
+             {data.title}
+          </h2>
+      )}
+
+      {/* GRID: gap 1.5rem, minmax 300px */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map((item) => {
+          const IconComponent = ICON_MAP[item.icon?.toLowerCase() || ''] || Box;
+
+          return (
+            <div 
+              key={item.id} 
+              className="
+                group relative flex flex-col h-full
+                bg-site-card border border-site-border rounded-xl p-8
+                transition-all duration-300 ease-out
+                hover:-translate-y-1 hover:border-site-accent hover:shadow-2xl
+              "
+            >
+              {/* CARD ICON: accent color, accent-glow bg, 40x40px */}
+              <div className="mb-5 w-10 h-10 flex items-center justify-center rounded-lg bg-[rgba(88,166,255,0.15)] text-site-accent text-xl">
+                 <IconComponent size={20} />
               </div>
-            ))}
-            
-            {!loading && displayItems.length === 0 && (
-               <div className="col-12 text-center text-muted py-5 bg-light rounded">
-                 Nessun contenuto trovato in "<strong>{data.sourceCollection}</strong>".
-               </div>
-            )}
-          </div>
-        )}
+
+              {/* CARD TITLE: size 1.1rem, bold */}
+              <h3 className="text-lg font-semibold mb-3 text-white">
+                {item.title}
+              </h3>
+
+              {/* CARD BODY: size 0.95rem, color secondary */}
+              <p className="text-[0.95rem] leading-relaxed text-site-text-sec flex-grow">
+                {item.body}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
