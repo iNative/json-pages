@@ -11,7 +11,7 @@ export const Shell: React.FC = () => {
   return (
     <div className="fade-page flex flex-col min-h-screen">
        {/* Header Shadcn */}
-       <Header />
+     
 
        {/* Main Content Area */}
        <main className="flex-grow-1">
@@ -25,7 +25,7 @@ export const Shell: React.FC = () => {
        </main>
        
        {/* Footer Shadcn */}
-       <Footer />
+       
     </div>
   );
 };

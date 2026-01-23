@@ -1,4 +1,4 @@
-import { useConfig } from '../context/ConfigContext';
+import { useConfig } from '../../context/ConfigContext';
 
 export const useFooter = () => {
   const { site, menu } = useConfig();
@@ -6,6 +6,7 @@ export const useFooter = () => {
 
   return {
     siteTitle: site?.title || 'JsonPages',
+    // copyrightText: copyrightText,
     // Filtriamo eventuali voci di menu specifiche per il footer se necessario
     // Per ora usiamo lo stesso menu principale come "Link Utili"
     footerLinks: menu, 

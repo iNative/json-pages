@@ -5,7 +5,7 @@
 # ==========================================
 
 # Cartella di destinazione per gli zip
-DEST_DIR="$HOME/zipped-json-pages-react-v0.3"
+DEST_DIR="$HOME/zipped-json-pages-react-day7"
 
 # LISTA DEI TARGET: Inserisci qui file o cartelle che vuoi includere.
 # Puoi mettere percorsi specifici (es. "apps/backend/src") o file singoli.
@@ -85,7 +85,7 @@ echo "📦 Creazione archivi (Max 10 file ciascuno)..."
 for chunk in "$DEST_DIR"/chunk_*; do
     # Genera nome progressivo (part-01.zip, part-02.zip...)
     suffix=$(printf "%02d" $((count + 1)))
-    zip_name="zipped-json-pages-react-v0.3-part-${suffix}.zip" 
+    zip_name="zipped-json-pages-react-day7-part-${suffix}.zip" 
     
     # Crea lo zip leggendo la lista dal chunk corrente
     cat "$chunk" | zip -q "$DEST_DIR/$zip_name" -@

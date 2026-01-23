@@ -2,6 +2,7 @@ import React from 'react';
 import { PageBlock } from '@json-pages/shared-data';
 
 // Importiamo tutti i blocchi disponibili
+import { Footer    } from '../components/ui/Footer'
 import { HeroBlock } from '../blocks/HeroBlock';
 import { GridBlock } from '../blocks/GridBlock';
 import { TextBlock } from '../blocks/TextBlock';
@@ -12,6 +13,10 @@ export const BlockRenderer: React.FC<{ block: PageBlock }> = ({ block }) => {
   if (block.settings?.hidden) return null;
 
   switch (block.type) {
+
+     case 'footer':
+      return <Footer data={block.data} settings={block.settings} />;
+
     case 'hero':
       return <HeroBlock data={block.data} settings={block.settings} />;
     
