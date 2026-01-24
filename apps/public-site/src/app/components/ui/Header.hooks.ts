@@ -1,6 +1,8 @@
+// FILE: apps/public-site/src/app/components/ui/Header.hooks.ts
 import { useState } from 'react';
-import { useConfig } from '../context/ConfigContext';
-import { useTenant } from '../context/TenantContext';
+// 👇 CORREZIONE: Aggiungi un altro livello di risalita (../../)
+import { useConfig } from '../../context/ConfigContext';
+import { useTenant } from '../../context/TenantContext';
 
 export const useHeader = () => {
   const { site, menu } = useConfig();

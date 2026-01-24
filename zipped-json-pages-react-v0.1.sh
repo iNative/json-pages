@@ -5,19 +5,25 @@
 # ==========================================
 
 # Cartella di destinazione per gli zip
-DEST_DIR="$HOME/zipped-json-pages-react-day7"
+DEST_DIR="$HOME/zip-json-pages-style2"
 
 # LISTA DEI TARGET: Inserisci qui file o cartelle che vuoi includere.
 # Puoi mettere percorsi specifici (es. "apps/backend/src") o file singoli.
 TARGETS=(
     "package.json"
     "nx.json"
+    "jest.config.ts"
+    "eslint.config.mjs"
+    "jest.preset.js"
     "tsconfig.base.json"
-    "data-store/system"             # React
-    "data-store/default" 
-    "apps/public-site"       # React
-    "apps/backend"       # NestJS
-    "libs"    
+    "apps/backend"       # Include tutto il sorgente backend
+    
+    "apps/public-site"      # Include tutto il sorgente frontend
+    "libs"                   # Include la lib UI
+    
+    "data-store/system" 
+        
+    "data-store/tenants/default"
     # Aggiungi qui altri percorsi se necessario
 )
 
@@ -85,7 +91,7 @@ echo "📦 Creazione archivi (Max 10 file ciascuno)..."
 for chunk in "$DEST_DIR"/chunk_*; do
     # Genera nome progressivo (part-01.zip, part-02.zip...)
     suffix=$(printf "%02d" $((count + 1)))
-    zip_name="zipped-json-pages-react-day7-part-${suffix}.zip" 
+    zip_name="zip-json-pages-style2-part-${suffix}.zip"
     
     # Crea lo zip leggendo la lista dal chunk corrente
     cat "$chunk" | zip -q "$DEST_DIR/$zip_name" -@

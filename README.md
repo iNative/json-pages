@@ -1,105 +1,118 @@
-# JsonPages Monorepo
+# JsonPages |  Multi-Tenant CMS Architecture
+**Version:** 0.7.0 (Dev Preview)
+**Commit Ref:** #07 - Styling Pipeline & Context Stabilization
 
-Welcome to **JsonPages**. This repository houses a robust, "Tenant-First" CMS architecture designed to serve multiple sites from a single codebase.
+## 1. Project Overview
+JsonPages is a decoupled, multi-tenant Content Management System designed for high scalability and separation of concerns. It leverages a **Monorepo** architecture (Nx) to unify a NestJS backend core with a dynamic React frontend.
 
-We are currently in an exciting phase of architectural evolution, shifting our public-facing frontend to a high-performance **React** application while leveraging our solid **NestJS** backend.
+The system operates on a **"Zero-DB"** philosophy for content, utilizing a structured JSON file system (`data-store`) to drive configuration, routing, styling, and content rendering.
 
----
-
-## 🚀 Current Release Status: The "React Migration"
-
-**Date:** January 24, 2026
-
-In this release, we have successfully established the new foundation for the public frontend. The architecture has evolved from a single Angular application to a specialized separation of concerns:
-
-* **`apps/public-site` (New):** A React + Vite application acting as the dynamic public CMS.
-* **`apps/frontend` (Legacy):** The original Angular application, now designated to become the future Admin Panel.
-* **`apps/backend`:** The NestJS core that serves data, configuration, and assets.
-
-### ✨ Key Features Implemented
-
-We have moved beyond a simple "Hello World" to a fully functional, data-driven engine.
-
-1.  **Multi-Tenant "Brain" (Context API)**
-    * The application resolves the Tenant ID (e.g., `trinacria`, `demo`) *before* the UI renders.
-    * Implemented via `TenantProvider` connecting to `/api/system/resolve`.
-
-2.  **Dynamic Theme Engine**
-    * Styles (CSS) and Scripts (Bootstrap, jQuery) are injected dynamically based on the active tenant.
-    * This ensures each site retains its unique visual identity without code duplication.
-
-3.  **Data-Driven Layout (The Shell)**
-    * **Header & Footer:** Completely dynamic, rendering logos, menus, and contact info based on `site.json` and `menu.json` configurations.
-    * **Pattern:** We utilize a "Logic via Custom Hooks" pattern (e.g., `useHeader`, `useFooter`) to keep our UI components pure and testable.
-
-4.  **Dynamic Page Builder (The Engine)**
-    * **Routing:** `react-router-dom` handles dynamic slugs (`/`, `/about`, `/news`).
-    * **Block Renderer:** A smart component that reads page definitions (JSON) and renders the appropriate UI blocks on the fly.
-    * **Available Blocks:**
-        * `HeroBlock`: First component to test the block-render engine.
-       
-       
+### Key Architectural Features
+* **Core:** NestJS (API Gateway, Static Asset Server, Proxy).
+* **Client:** React + Vite (SPA, Dynamic Block Rendering).
+* **Multi-Tenancy:** Resolved via Hostname and `X-Site-ID` headers.
+* **Styling:** Tenant-specific CSS injection (TailwindCSS) with runtime loading.
+* **Data Source:** File-system based JSON repository.
 
 ---
 
-## 🛠️ Tech Stack
+## 2. Environment Setup
 
-We believe in using the right tool for the job:
+### Prerequisites
+* Node.js (LTS recommended)
+* NPM or Yarn
+* Nx CLI (`npm install -g nx`)
 
-* **Monorepo Tool:** Nx (v22.3.3)
-* **Backend:** NestJS
-* **Frontend:** React 19 + Vite (SCSS Modules)
-* **Routing:** React Router v6
-* **Type Safety:** TypeScript (Shared interfaces via `libs/shared-data`)
+### Installation
+```bash
+npm install
+```
 
----
+### Development Execution
+The system requires both the backend API and the frontend client to run simultaneously.
 
-## 🏃‍♂️ Getting Started
-
-To run the full stack locally, you will need **two terminal instances**.
-
-### 1. Start the Backend
-The backend serves the API and the static assets (images, CSS). It listens on port **3000**.
-
+**1. Start Backend API (Port 3000)**
 ```bash
 nx serve backend
 ```
 
-### 2. Start the Public Site
-The React frontend connects to the backend via a configured Proxy. It listens on port **4200**.
-
+**2. Start Frontend Client (Port 4200)**
 ```bash
 nx serve public-site
 ```
 
-> **Tip:** You can simulate different tenants locally by adding a query parameter:
-> `http://localhost:4200/?tenant=demo`
+---
+
+## 3. Styling Workflow (Manual Pipeline)
+**Note:** As of Commit #07, the CSS build process is **not yet automated** in the CI/CD pipeline. Styles must be compiled manually when changes are made to the tenant's `input.css`.
+
+**Command to generate Tenant CSS:**
+```bash
+npx @tailwindcss/cli -i data-store/tenants/default/input.css -o data-store/tenants/default/assets/css/style.css
+```
+*Execute this command in the project root whenever `input.css` or React components are modified.*
 
 ---
 
-## 📂 Project Structure
+## 4. Architecture & Data Flow
 
-Here is a quick map to help you navigate the codebase:
+### Tenant Resolution
+1.  **Browser:** User requests `localhost` (or mapped domain).
+2.  **Frontend (`TenantContext`):** Queries `/api/system/resolve?hostname=...`.
+3.  **Backend:** Maps hostname to a `tenantId` (e.g., `default`).
+4.  **Frontend:** Stores `tenantId` and attaches `X-Site-ID: default` to all subsequent API calls.
 
-| Path | Description |
-| :--- | :--- |
-| **`apps/backend`** | NestJS Application. Handles `api/system`, `api/content`, and serves Assets. |
-| **`apps/public-site`** | **(Focus)** The new React Frontend. Contains the Page Builder engine. |
-| **`apps/frontend`** | Angular Application (Legacy/Admin). |
-| **`libs/shared-data`** | TypeScript interfaces shared between BE and FE (DTOs, Block definitions). |
-| **`data-store/`** | The JSON files acting as our database (Tenant configurations and content). |
-
----
-
-## 🔮 What's Next?
-
-With the core engine in place, our roadmap focuses on:
-1.  **Styling:** Add a Tailwind pipeline to each tenant.
-2.  **Content Expansion:** Adding more specialized UI Blocks (Galleries, Forms).
-3.  **CMS:** add a React Tenant CMS app to the workspace to edit tenat's content and style. {"userType":"editor"}
-4.  **NgAdmin:** Refactoring the Angular app to manage users. {"userType":"admin"}
-5.  **Testing:** Expanding E2E coverage with Cypress.
+### Page Rendering Strategy
+1.  **Frontend (`usePage`):** Fetches content from `/api/pages/{slug}`.
+2.  **Dynamic Rendering:** The `BlockRenderer` component iterates over the JSON `blocks` array.
+3.  **Component Mapping:** JSON types (e.g., `hero`, `grid`, `code`) are mapped to React components at runtime.
 
 ---
 
-*Crafted with care by Guido Filippo Serio.*
+## 5. Current Status & Technical Debt (Commit #07)
+
+### ✅ Functional Modules
+* **Backend Routing:** API endpoints for Page, Config, and Asset retrieval are stable.
+* **Asset Injection:** `Shell.tsx` successfully injects tenant-specific CSS (`style.css`) via `useThemeLoader`.
+* **JSON Parsing:** React DevTools source-map errors isolated; data flow confirmed via console logs.
+* **Component Library:** Hero, Grid, Text, and Code blocks are implemented.
+
+### ⚠️ Critical Technical Debt (Backlog)
+The following issues are identified and scheduled for immediate refactoring:
+
+1.  **SPA Routing Violation:**
+    * **Issue:** The `Header` component currently uses standard HTML `<a>` tags.
+    * **Impact:** Causes full page reloads, destroying application state and context on navigation.
+    * **Fix:** Migration to `react-router-dom/Link` required.
+
+2.  **Security Vulnerability (XSS):**
+    * **Issue:** `TextBlock.tsx` utilizes `dangerouslySetInnerHTML` without input sanitization.
+    * **Impact:** High risk of Cross-Site Scripting via compromised JSON files.
+    * **Fix:** Implementation of `dompurify` library is mandatory.
+
+3.  **Layout Redundancy:**
+    * **Issue:** Footer is rendered statically in `Shell.tsx` AND dynamically via JSON blocks.
+    * **Fix:** Removal of hardcoded Footer to establish JSON as the Single Source of Truth (SSoT).
+
+4.  **Build Automation:**
+    * **Issue:** Lack of `npm run build:css` script.
+    * **Fix:** Integration of Tailwind CLI command into `project.json` targets.
+
+---
+
+## 6. Directory Structure (Data Store)
+
+The `data-store` serves as the database for the application.
+
+```text
+data-store/
+├── system/
+│   └── domains.json         # Hostname -> TenantId mapping
+└── tenants/
+    └── [tenant-id]/
+        ├── assets/          # Static files (Images, compiled CSS)
+        ├── config/          # Site-wide settings (Menu, Theme, Site info)
+        ├── pages/           # Page definitions (Home, About, etc.)
+        ├── input.css        # Tailwind source file
+        └── tailwind.config.js
+```

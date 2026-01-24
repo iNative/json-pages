@@ -1,3 +1,4 @@
+// FILE: apps/public-site/src/app/hooks/useThemeLoader.ts
 import { useEffect, useState } from 'react';
 
 export const useThemeLoader = (tenantId: string) => {
@@ -6,26 +7,18 @@ export const useThemeLoader = (tenantId: string) => {
   useEffect(() => {
     if (!tenantId) return;
 
-    // 👇 CORREZIONE: Aggiunto /api/ all'inizio del percorso
-    // Il backend serve gli statici sotto il global prefix 'api'
+    // Percorso API gestito da AssetsController nel backend
     const baseUrl = `/api/assets/${tenantId}`; 
     console.log(`🎨 [ThemeLoader] Iniezione asset per: ${tenantId}`);
 
     const cssFiles = [
-      `${baseUrl}/css/theme.css`,
-      `${baseUrl}/css/user.css`
+      `${baseUrl}/css/style.css` 
     ];
 
-    const jsFiles = [
-      `${baseUrl}/js/jquery.min.js`,
-      `${baseUrl}/js/popper.min.js`,
-      `${baseUrl}/js/bootstrap.js`,
-      `${baseUrl}/js/aos.js`,
-      `${baseUrl}/js/theme.js`
-    ];
-
-    // Helper per caricare CSS
     const loadCss = (href: string) => {
+      // Evitiamo duplicati
+      if (document.querySelector(`link[href="${href}"]`)) return;
+
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = href;
@@ -33,37 +26,24 @@ export const useThemeLoader = (tenantId: string) => {
       document.head.appendChild(link);
     };
 
-    // Helper per caricare JS (Promise-based)
-    const loadScript = (src: string) => {
-      return new Promise<void>((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = false; 
-        script.setAttribute('data-tenant-asset', 'true');
-        script.onload = () => resolve();
-        script.onerror = () => reject(new Error(`Errore caricamento ${src}`));
-        document.body.appendChild(script);
-      });
-    };
-
     const loadAssets = async () => {
       try {
         cssFiles.forEach(loadCss);
-
-        for (const src of jsFiles) {
-          await loadScript(src);
-        }
-
-        console.log('✅ [ThemeLoader] Tutti gli asset caricati');
+        // Simuliamo un piccolo delay se necessario, o assumiamo caricamento CSS immediato dal browser
+        // In produzione reale, si potrebbe usare onload sul tag link, ma per ora basta questo.
+        console.log('✅ [ThemeLoader] Richiesta asset inviata');
         setLoaded(true);
       } catch (error) {
         console.error('❌ [ThemeLoader] Errore critico:', error);
+        // Anche in caso di errore, settiamo loaded true per non bloccare l'app per sempre
+        setLoaded(true); 
       }
     };
 
     loadAssets();
 
     return () => {
+      // Cleanup al cambio tenant (opzionale se l'app fa refresh completo)
       document.querySelectorAll('[data-tenant-asset]').forEach(el => el.remove());
       setLoaded(false);
     };

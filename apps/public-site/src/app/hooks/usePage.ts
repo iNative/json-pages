@@ -1,3 +1,4 @@
+// FILE: apps/public-site/src/app/hooks/usePage.ts
 import { useState, useEffect } from 'react';
 import { useTenant } from '../context/TenantContext';
 import { PageDefinition } from '@json-pages/shared-data';
@@ -34,6 +35,10 @@ export const usePage = (slug?: string) => {
         }
 
         const data = await res.json();
+        
+        // Log di conferma (utile per debuggare problemi di parsing JSON vs HTML error pages)
+        console.log(`✅ [usePage] Dati ricevuti correttamente per ${targetSlug}:`, data);
+        
         setPage(data);
       } catch (err: any) {
         console.error(`❌ Errore caricamento pagina [${targetSlug}]:`, err);
