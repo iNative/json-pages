@@ -8,7 +8,7 @@ We are currently in an exciting phase of architectural evolution, shifting our p
 
 ## 🚀 Current Release Status: The "React Migration"
 
-**Date:** January 20, 2026
+**Date:** January 24, 2026
 
 In this release, we have successfully established the new foundation for the public frontend. The architecture has evolved from a single Angular application to a specialized separation of concerns:
 
@@ -36,9 +36,9 @@ We have moved beyond a simple "Hello World" to a fully functional, data-driven e
     * **Routing:** `react-router-dom` handles dynamic slugs (`/`, `/about`, `/news`).
     * **Block Renderer:** A smart component that reads page definitions (JSON) and renders the appropriate UI blocks on the fly.
     * **Available Blocks:**
-        * `HeroBlock`: For impactful banners.
-        * `GridBlock`: For dynamic lists (e.g., Athletes, News) fetched via `useCollection`.
-        * `TextBlock`: For rich HTML content.
+        * `HeroBlock`: First component to test the block-render engine.
+       
+       
 
 ---
 
@@ -94,10 +94,12 @@ Here is a quick map to help you navigate the codebase:
 ## 🔮 What's Next?
 
 With the core engine in place, our roadmap focuses on:
-1.  **Content Expansion:** Adding more specialized UI Blocks (Galleries, Forms).
-2.  **Admin Panel:** Refactoring the Angular app to manage the JSON files visually.
-3.  **Testing:** Expanding E2E coverage with Cypress.
+1.  **Styling:** Add a Tailwind pipeline to each tenant.
+2.  **Content Expansion:** Adding more specialized UI Blocks (Galleries, Forms).
+3.  **CMS:** add a React Tenant CMS app to the workspace to edit tenat's content and style. {"userType":"editor"}
+4.  **NgAdmin:** Refactoring the Angular app to manage users. {"userType":"admin"}
+5.  **Testing:** Expanding E2E coverage with Cypress.
 
 ---
 
-*Crafted with care by the JsonPages Team.*
+*Crafted with care by Guido Filippo Serio.*
