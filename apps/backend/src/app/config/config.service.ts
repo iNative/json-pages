@@ -25,7 +25,9 @@ export class ConfigService {
       const fileContent = await fs.readFile(filePath, 'utf-8');
       return JSON.parse(fileContent);
     } catch (error) {
-      this.logger.warn(`Config ${filename} mancante per ${this.tenantService.tenantId}`);
+
+      //FUNCTIONAL DEBT: MULTI LANGUAGE FEEDBACK
+      this.logger.warn(`Config ${filename} missing for ${this.tenantService.tenantId}`);
       return {}; 
     }
   }
