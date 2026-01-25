@@ -83,18 +83,3 @@ nx serve public-site
 
 ---
 
-## 🔍 Code Integrity Protocols
-
-This project strictly adheres to the following development protocols:
-
-1.  **"Zero Assumptions" Protocol:**
-    Every code modification is preceded by static analysis and verification of the current source. No refactoring is based on memory or unverified theoretical standards.
-
-2.  **"No Workarounds" Protocol:**
-    * Strict prohibition of `--force` or `--legacy-peer-deps`.
-    * Strict prohibition of unjustified `any` types.
-    * Every error (Build/Lint) is resolved at the Root Cause.
-
----
-
-**End of Documentation**
