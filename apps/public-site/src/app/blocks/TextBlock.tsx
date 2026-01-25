@@ -1,5 +1,7 @@
 import React from 'react';
 import { TextBlockData, BlockSettings } from '@json-pages/shared-data';
+// 👇 IMPORT UTILITY SICUREZZA
+import { sanitizeHtml } from '../utils/security';
 
 interface Props {
   data: TextBlockData;
@@ -7,6 +9,10 @@ interface Props {
 }
 
 export const TextBlock: React.FC<Props> = ({ data, settings }) => {
+  // 🔒 SANITIZZAZIONE PREVENTIVA
+  // Puliamo l'HTML prima ancora che venga passato al rendering
+  const safeContent = sanitizeHtml(data.content);
+
   return (
     <section 
       className={settings?.cssClass}
@@ -19,10 +25,10 @@ export const TextBlock: React.FC<Props> = ({ data, settings }) => {
       <div className={settings?.container === 'fluid' ? 'container-fluid' : 'container'}>
         {data.title && <h2 className="mb-4 font-weight-bold">{data.title}</h2>}
         
-        {/* Renderizziamo l'HTML in modo sicuro (React richiede dangerouslySetInnerHTML) */}
+        {/* Renderizziamo l'HTML pulito */}
         <div 
           className="content-body"
-          dangerouslySetInnerHTML={{ __html: data.content }} 
+          dangerouslySetInnerHTML={{ __html: safeContent }} 
         />
       </div>
     </section>

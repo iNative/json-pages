@@ -11,6 +11,51 @@
       "options": {
         "jestConfig": "apps/public-site/jest.config.cts"
       }
+    },
+    // 👇 UPDATE: Target per la Global Build (Incrementale)
+    "build-global-styles": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/build-tenants-css.js",
+        "parallel": false 
+      }
+    },
+    // 👇 UPDATE: Target Watch specifico per sviluppo (può rimanere sul tenant default o evolvere)
+    // Per ora lo lasciamo puntare al default come "Active Dev Tenant", ma disaccoppiato dalla build globale
+    "watch-style-default": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx @tailwindcss/cli -i data-store/tenants/default/input.css -o data-store/tenants/default/assets/css/style.css --config data-store/tenants/default/tailwind.config.js --watch"
+      }
+    },
+    "serve-vite": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "public-site:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "public-site:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "public-site:build:production",
+          "hmr": false
+        }
+      }
+    },
+    // 👇 ORCHESTRAZIONE SERVE
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run public-site:build-global-styles", // 1. Prima esegue check/build globale
+          "nx run public-site:watch-style-default", // 2. Poi attiva watch su default (parallelo)
+          "nx run public-site:serve-vite"           // 3. E server React (parallelo)
+        ],
+        "parallel": true
+      }
     }
   }
 }

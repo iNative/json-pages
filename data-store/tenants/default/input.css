@@ -1,5 +1,4 @@
-/* 👇 AGGIUNGI QUESTA RIGA ALL'INIZIO */
-@config "./tailwind.config.js";
+/* ❌ RIMOSSO: @config "./tailwind.config.js"; -> Gestito via CLI */
 
 @tailwind base;
 @tailwind components;

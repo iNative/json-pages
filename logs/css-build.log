@@ -1,0 +1,18 @@
+[2026-01-25T12:14:55.791Z] === GLOBAL CSS BUILD START ===
+[2026-01-25T12:14:55.793Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-25T12:14:55.793Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-25T12:14:55.793Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-25T12:14:55.793Z] === REPORT FINALE ===
+[2026-01-25T12:14:55.793Z] ✅ Generati: 0
+[2026-01-25T12:14:55.793Z] ⏭️  Saltati: 2
+[2026-01-25T12:14:55.793Z] ❌ Errori: 0
+[2026-01-25T12:14:55.793Z] === GLOBAL CSS BUILD END ===
+[2026-01-25T12:58:44.413Z] === GLOBAL CSS BUILD START ===
+[2026-01-25T12:58:44.414Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-25T12:58:44.415Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-25T12:58:44.415Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-25T12:58:44.415Z] === REPORT FINALE ===
+[2026-01-25T12:58:44.415Z] ✅ Generati: 0
+[2026-01-25T12:58:44.416Z] ⏭️  Saltati: 2
+[2026-01-25T12:58:44.416Z] ❌ Errori: 0
+[2026-01-25T12:58:44.416Z] === GLOBAL CSS BUILD END ===

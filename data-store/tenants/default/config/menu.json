@@ -1,6 +1,6 @@
 [
   { "label": "Home", "path": "/" },
-  { "label": "Chi Siamo", "path": "/chi-siamo" },
+  { "label": "about", "path": "/about" },
   { "label": "Atleti", "path": "/atleti" },
   { "label": "Risultati", "path": "/news" }
 ]

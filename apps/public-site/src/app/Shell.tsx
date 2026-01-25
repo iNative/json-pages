@@ -1,8 +1,8 @@
 // FILE: apps/public-site/src/app/Shell.tsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Header } from './components/ui/Header';
-import { Footer } from './components/ui/Footer';
+
+
 import { DynamicPage } from './pages/DynamicPage';
 import { useTenant } from './context/TenantContext';
 import { useThemeLoader } from './hooks/useThemeLoader';
@@ -24,8 +24,8 @@ export const Shell: React.FC = () => {
 
   return (
     <div className="fade-page flex flex-col min-h-screen font-sans text-site-text bg-site-bg">
-       {/* Header Shadcn */}
-       <Header />
+       
+       
 
        {/* Main Content Area */}
        <main className="flex-grow">
@@ -38,8 +38,8 @@ export const Shell: React.FC = () => {
           </Routes>
        </main>
        
-       {/* Footer Shadcn */}
-       <Footer />
+       
+      
     </div>
   );
 };

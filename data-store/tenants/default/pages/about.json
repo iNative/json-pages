@@ -7,25 +7,10 @@
   },
   "blocks": [
     {
-      "id": "xss-test",
-      "type": "text",
-      "data": {
-        "content": "Test Sicurezza: <img src=x onerror=alert('XSS_VULNERABILITY') /> <script>alert('SCRIPT_XSS')</script>"
-      }
-  },
-    {
-      "id": "header-main",
-      "type": "header",
-      "data": {
-        "menuSource": "main", 
-        "sticky": true
-      }
-    },
-    {
       "id": "hero-1",
       "type": "hero",
       "data": {
-        "title": "Multi-Tenant CMS Architecture.",
+        "title": "ABOUT PAGE.",
         "subtitle": "A unified monorepo powering multiple sites from a single codebase. Featuring a NestJS core and a dynamic, data-driven React frontend.",
         "category": "v4.3 Release",
         "align": "left"
@@ -35,7 +20,6 @@
         "paddingBottom": "6rem"
       }
     },
-    
     {
       "id": "footer",
       "type": "footer",

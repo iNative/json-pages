@@ -1,0 +1,8 @@
+(Schema Ibrido)
+
+Nome Colonna	Tipo di Dato	Motivo
+id	UUID / SERIAL	Chiave primaria (veloce)
+tenant_id	UUID (Indexed)	Isolamento clienti e sicurezza
+content_type	VARCHAR	Filtro rapido (es: 'post', 'page', 'product')
+created_at	TIMESTAMP	Ordinamento e log
+data	JSONB	Tutto il corpo flessibile del contenuto

@@ -1,118 +1,100 @@
-# JsonPages |  Multi-Tenant CMS Architecture
-**Version:** 0.7.0 (Dev Preview)
-**Commit Ref:** #07 - Styling Pipeline & Context Stabilization
+# JsonPages - Enterprise Multi-Tenant CMS Architecture
 
-## 1. Project Overview
-JsonPages is a decoupled, multi-tenant Content Management System designed for high scalability and separation of concerns. It leverages a **Monorepo** architecture (Nx) to unify a NestJS backend core with a dynamic React frontend.
-
-The system operates on a **"Zero-DB"** philosophy for content, utilizing a structured JSON file system (`data-store`) to drive configuration, routing, styling, and content rendering.
-
-### Key Architectural Features
-* **Core:** NestJS (API Gateway, Static Asset Server, Proxy).
-* **Client:** React + Vite (SPA, Dynamic Block Rendering).
-* **Multi-Tenancy:** Resolved via Hostname and `X-Site-ID` headers.
-* **Styling:** Tenant-specific CSS injection (TailwindCSS) with runtime loading.
-* **Data Source:** File-system based JSON repository.
+**Version:** 0.1.0 (Enterprise Release)
+**Author:** Guido Filippo Serio
+**License:** Proprietary
 
 ---
 
-## 2. Environment Setup
+## 📋 Executive Summary
+
+This release (v0.1.0) marks a pivotal transition towards a fully **Data-Driven** and **Secure-by-Design** architecture.
+The update eradicates technical debt associated with hardcoded structural components, introduces a robust, parallelized CSS build pipeline, and mitigates critical security vulnerabilities (XSS). The entire stack now strictly adheres to "Zero Assumptions" and "Enterprise Grade" (No Workarounds) protocols.
+
+---
+
+## 🏗 Architectural Upgrades
+
+### 1. Single Source of Truth (SSOT) Implementation
+**Objective:** Total decoupling of Layout (Shell) from Content.
+
+* **Pre-Release State:** Header and Footer components were hardcoded within `Shell.tsx`, creating discrepancies with the data defined in page JSON files and limiting flexibility for Landing Pages or alternative layouts.
+* **Current State:**
+    * `Shell.tsx` is now a "pure" container (agnostic to content structure).
+    * Header and Footer are treated as **dynamic blocks** (`type: 'header'`, `type: 'footer'`) handled via `BlockRenderer`.
+    * The page JSON file serves as the absolute **Single Source of Truth** for the rendered structure.
+
+### 2. Client-Side Routing & SPA Performance
+**Objective:** Elimination of "Hard Navigations" to preserve application state.
+
+* **Pre-Release State:** Usage of standard HTML `<a>` tags caused full page refreshes (Flickering), resetting the `TenantContext` and forcing CSS asset re-downloads on every interaction.
+* **Current State:**
+    * Pervasive implementation of `<Link>` and `<NavLink>` (React Router DOM).
+    * **Soft Navigation:** Instant transitions without document reload.
+    * **State Persistence:** Tenant context and configuration remain active during navigation.
+    * **Active States:** Automatic handling of CSS classes for active menu items via router logic.
+
+### 3. Automated & Robust CSS Pipeline
+**Objective:** Automation of Tailwind v4 compilation and resolution of "Brittle Code".
+
+* **Pre-Release State:** Dependency on manual CLI commands and fragile relative paths (`../../../apps...`) within `tailwind.config.js`.
+* **Current State:**
+    * **Path Hardening:** Tailwind configuration updated to use `process.cwd()`, making the build independent of the execution directory.
+    * **Global Build Orchestrator:** New Node.js script `tools/scripts/build-tenants-css.js` manages massive compilation.
+        * **Idempotency:** Builds occur only for tenants missing generated CSS.
+        * **Parallelism:** Concurrent execution to optimize startup time.
+        * **Fault Tolerance:** "Best Effort" approach (a failure in one tenant does not halt the pipeline).
+        * **Logging:** Detailed output to file (`logs/css-build.log`) for audit purposes.
+
+### 4. Security Layer (XSS Prevention)
+**Objective:** Risk mitigation for Cross-Site Scripting on injected content.
+
+* **Pre-Release State:** Direct use of `dangerouslySetInnerHTML` on raw JSON data.
+* **Current State:**
+    * Integration of **DOMPurify** library.
+    * Creation of a centralized utility `security.ts` for input sanitization.
+    * `TextBlock` and `HtmlBlock` components now automatically filter malicious scripts and dangerous attributes (e.g., `onerror`, `onclick`) while maintaining safe HTML formatting.
+
+---
+
+## 🛠 Operational Guide
 
 ### Prerequisites
-* Node.js (LTS recommended)
-* NPM or Yarn
-* Nx CLI (`npm install -g nx`)
+* **Runtime:** Node.js (LTS Version)
+* **Monorepo Tool:** Nx v22.3.3
 
-### Installation
-```bash
-npm install
-```
+### Development Startup
+The architecture requires the parallel execution of the Backend (API/Assets) and Frontend (Public Site).
 
-### Development Execution
-The system requires both the backend API and the frontend client to run simultaneously.
+#### 1. Backend Service
+Manages tenant resolution, static asset serving, and configuration APIs.
 
-**1. Start Backend API (Port 3000)**
 ```bash
 nx serve backend
 ```
 
-**2. Start Frontend Client (Port 4200)**
+#### 2. Public Site (Frontend)
+Automatically triggers the CSS orchestration and launches the Vite development server.
+
 ```bash
 nx serve public-site
 ```
+*Note: Upon launch, the system checks for the existence of `style.css` for every tenant. If missing, it is generated automatically before the server starts.*
 
 ---
 
-## 3. Styling Workflow (Manual Pipeline)
-**Note:** As of Commit #07, the CSS build process is **not yet automated** in the CI/CD pipeline. Styles must be compiled manually when changes are made to the tenant's `input.css`.
+## 🔍 Code Integrity Protocols
 
-**Command to generate Tenant CSS:**
-```bash
-npx @tailwindcss/cli -i data-store/tenants/default/input.css -o data-store/tenants/default/assets/css/style.css
-```
-*Execute this command in the project root whenever `input.css` or React components are modified.*
+This project strictly adheres to the following development protocols:
 
----
+1.  **"Zero Assumptions" Protocol:**
+    Every code modification is preceded by static analysis and verification of the current source. No refactoring is based on memory or unverified theoretical standards.
 
-## 4. Architecture & Data Flow
-
-### Tenant Resolution
-1.  **Browser:** User requests `localhost` (or mapped domain).
-2.  **Frontend (`TenantContext`):** Queries `/api/system/resolve?hostname=...`.
-3.  **Backend:** Maps hostname to a `tenantId` (e.g., `default`).
-4.  **Frontend:** Stores `tenantId` and attaches `X-Site-ID: default` to all subsequent API calls.
-
-### Page Rendering Strategy
-1.  **Frontend (`usePage`):** Fetches content from `/api/pages/{slug}`.
-2.  **Dynamic Rendering:** The `BlockRenderer` component iterates over the JSON `blocks` array.
-3.  **Component Mapping:** JSON types (e.g., `hero`, `grid`, `code`) are mapped to React components at runtime.
+2.  **"No Workarounds" Protocol:**
+    * Strict prohibition of `--force` or `--legacy-peer-deps`.
+    * Strict prohibition of unjustified `any` types.
+    * Every error (Build/Lint) is resolved at the Root Cause.
 
 ---
 
-## 5. Current Status & Technical Debt (Commit #07)
-
-### ✅ Functional Modules
-* **Backend Routing:** API endpoints for Page, Config, and Asset retrieval are stable.
-* **Asset Injection:** `Shell.tsx` successfully injects tenant-specific CSS (`style.css`) via `useThemeLoader`.
-* **JSON Parsing:** React DevTools source-map errors isolated; data flow confirmed via console logs.
-* **Component Library:** Hero, Grid, Text, and Code blocks are implemented.
-
-### ⚠️ Critical Technical Debt (Backlog)
-The following issues are identified and scheduled for immediate refactoring:
-
-1.  **SPA Routing Violation:**
-    * **Issue:** The `Header` component currently uses standard HTML `<a>` tags.
-    * **Impact:** Causes full page reloads, destroying application state and context on navigation.
-    * **Fix:** Migration to `react-router-dom/Link` required.
-
-2.  **Security Vulnerability (XSS):**
-    * **Issue:** `TextBlock.tsx` utilizes `dangerouslySetInnerHTML` without input sanitization.
-    * **Impact:** High risk of Cross-Site Scripting via compromised JSON files.
-    * **Fix:** Implementation of `dompurify` library is mandatory.
-
-3.  **Layout Redundancy:**
-    * **Issue:** Footer is rendered statically in `Shell.tsx` AND dynamically via JSON blocks.
-    * **Fix:** Removal of hardcoded Footer to establish JSON as the Single Source of Truth (SSoT).
-
-4.  **Build Automation:**
-    * **Issue:** Lack of `npm run build:css` script.
-    * **Fix:** Integration of Tailwind CLI command into `project.json` targets.
-
----
-
-## 6. Directory Structure (Data Store)
-
-The `data-store` serves as the database for the application.
-
-```text
-data-store/
-├── system/
-│   └── domains.json         # Hostname -> TenantId mapping
-└── tenants/
-    └── [tenant-id]/
-        ├── assets/          # Static files (Images, compiled CSS)
-        ├── config/          # Site-wide settings (Menu, Theme, Site info)
-        ├── pages/           # Page definitions (Home, About, etc.)
-        ├── input.css        # Tailwind source file
-        └── tailwind.config.js
-```
+**End of Documentation**
