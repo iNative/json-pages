@@ -49,7 +49,7 @@ export interface ContentItem {
 // =========================================================
 
 // 👇 UNICA DEFINIZIONE DI BLOCKTYPE
-export type BlockType = 'header' | 'hero' | 'grid' | 'text' | 'html' | 'footer' | 'code';
+export type BlockType = 'header' | 'hero' | 'grid' | 'text' | 'html' | 'footer' | 'code'| 'ui-test';
 
 export interface PageBlock<T = any> {
   id: string;

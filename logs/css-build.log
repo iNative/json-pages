@@ -16,3 +16,267 @@
 [2026-01-25T12:58:44.416Z] ⏭️  Saltati: 2
 [2026-01-25T12:58:44.416Z] ❌ Errori: 0
 [2026-01-25T12:58:44.416Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T09:30:13.057Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T09:30:13.058Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T09:30:13.058Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T09:30:13.059Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T09:30:13.059Z] === REPORT FINALE ===
+[2026-01-26T09:30:13.059Z] ✅ Generati: 0
+[2026-01-26T09:30:13.059Z] ⏭️  Saltati: 2
+[2026-01-26T09:30:13.059Z] ❌ Errori: 0
+[2026-01-26T09:30:13.059Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T12:09:32.621Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T12:09:32.623Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T12:09:32.624Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T12:09:32.624Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T12:09:32.624Z] === REPORT FINALE ===
+[2026-01-26T12:09:32.624Z] ✅ Generati: 0
+[2026-01-26T12:09:32.624Z] ⏭️  Saltati: 2
+[2026-01-26T12:09:32.624Z] ❌ Errori: 0
+[2026-01-26T12:09:32.624Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T12:14:31.792Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T12:14:31.793Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T12:14:31.793Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T12:14:31.793Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T12:14:31.794Z] === REPORT FINALE ===
+[2026-01-26T12:14:31.794Z] ✅ Generati: 0
+[2026-01-26T12:14:31.794Z] ⏭️  Saltati: 2
+[2026-01-26T12:14:31.794Z] ❌ Errori: 0
+[2026-01-26T12:14:31.794Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T12:14:53.015Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T12:14:53.017Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T12:14:53.017Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T12:14:53.017Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T12:14:53.017Z] === REPORT FINALE ===
+[2026-01-26T12:14:53.017Z] ✅ Generati: 0
+[2026-01-26T12:14:53.017Z] ⏭️  Saltati: 2
+[2026-01-26T12:14:53.017Z] ❌ Errori: 0
+[2026-01-26T12:14:53.017Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T12:17:25.892Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T12:17:25.894Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T12:17:25.894Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T12:17:25.895Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T12:17:25.895Z] === REPORT FINALE ===
+[2026-01-26T12:17:25.895Z] ✅ Generati: 0
+[2026-01-26T12:17:25.895Z] ⏭️  Saltati: 2
+[2026-01-26T12:17:25.895Z] ❌ Errori: 0
+[2026-01-26T12:17:25.895Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T13:38:51.592Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T13:38:51.594Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T13:38:51.595Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T13:38:51.595Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T13:38:51.595Z] === REPORT FINALE ===
+[2026-01-26T13:38:51.595Z] ✅ Generati: 0
+[2026-01-26T13:38:51.595Z] ⏭️  Saltati: 2
+[2026-01-26T13:38:51.595Z] ❌ Errori: 0
+[2026-01-26T13:38:51.595Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T13:51:54.903Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T13:51:54.910Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T13:51:54.911Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T13:51:54.911Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T13:51:54.911Z] === REPORT FINALE ===
+[2026-01-26T13:51:54.911Z] ✅ Generati: 0
+[2026-01-26T13:51:54.911Z] ⏭️  Saltati: 2
+[2026-01-26T13:51:54.911Z] ❌ Errori: 0
+[2026-01-26T13:51:54.911Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T13:52:52.432Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T13:52:52.434Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T13:52:52.434Z] 🚀 BUILD [default]: Avvio compilazione...
+[2026-01-26T13:52:52.436Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T13:52:53.977Z] ✅ SUCCESS [default]: CSS generato.
+[2026-01-26T13:52:53.977Z] === REPORT FINALE ===
+[2026-01-26T13:52:53.977Z] ✅ Generati: 1
+[2026-01-26T13:52:53.977Z] ⏭️  Saltati: 1
+[2026-01-26T13:52:53.978Z] ❌ Errori: 0
+[2026-01-26T13:52:53.978Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T14:03:43.138Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T14:03:43.139Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T14:03:43.140Z] 🚀 BUILD [default]: Avvio compilazione...
+[2026-01-26T14:03:43.142Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T14:03:44.738Z] ✅ SUCCESS [default]: CSS generato.
+[2026-01-26T14:03:44.739Z] === REPORT FINALE ===
+[2026-01-26T14:03:44.739Z] ✅ Generati: 1
+[2026-01-26T14:03:44.739Z] ⏭️  Saltati: 1
+[2026-01-26T14:03:44.739Z] ❌ Errori: 0
+[2026-01-26T14:03:44.739Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T14:04:33.621Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T14:04:33.622Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T14:04:33.623Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T14:04:33.623Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T14:04:33.623Z] === REPORT FINALE ===
+[2026-01-26T14:04:33.623Z] ✅ Generati: 0
+[2026-01-26T14:04:33.623Z] ⏭️  Saltati: 2
+[2026-01-26T14:04:33.623Z] ❌ Errori: 0
+[2026-01-26T14:04:33.623Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T14:05:51.706Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T14:05:51.707Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T14:05:51.707Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T14:05:51.708Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T14:05:51.708Z] === REPORT FINALE ===
+[2026-01-26T14:05:51.708Z] ✅ Generati: 0
+[2026-01-26T14:05:51.708Z] ⏭️  Saltati: 2
+[2026-01-26T14:05:51.708Z] ❌ Errori: 0
+[2026-01-26T14:05:51.708Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T14:17:36.489Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T14:17:36.491Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T14:17:36.492Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T14:17:36.492Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T14:17:36.492Z] === REPORT FINALE ===
+[2026-01-26T14:17:36.492Z] ✅ Generati: 0
+[2026-01-26T14:17:36.492Z] ⏭️  Saltati: 2
+[2026-01-26T14:17:36.492Z] ❌ Errori: 0
+[2026-01-26T14:17:36.492Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T14:41:50.148Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T14:41:50.149Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T14:41:50.149Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T14:41:50.149Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T14:41:50.150Z] === REPORT FINALE ===
+[2026-01-26T14:41:50.150Z] ✅ Generati: 0
+[2026-01-26T14:41:50.150Z] ⏭️  Saltati: 2
+[2026-01-26T14:41:50.150Z] ❌ Errori: 0
+[2026-01-26T14:41:50.150Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T14:42:27.300Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T14:42:27.302Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T14:42:27.303Z] 🚀 BUILD [default]: Avvio compilazione...
+[2026-01-26T14:42:27.305Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T14:42:28.953Z] ✅ SUCCESS [default]: CSS generato.
+[2026-01-26T14:42:28.953Z] === REPORT FINALE ===
+[2026-01-26T14:42:28.953Z] ✅ Generati: 1
+[2026-01-26T14:42:28.953Z] ⏭️  Saltati: 1
+[2026-01-26T14:42:28.953Z] ❌ Errori: 0
+[2026-01-26T14:42:28.953Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T15:24:26.096Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T15:24:26.099Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T15:24:26.099Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T15:24:26.099Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T15:24:26.100Z] === REPORT FINALE ===
+[2026-01-26T15:24:26.100Z] ✅ Generati: 0
+[2026-01-26T15:24:26.100Z] ⏭️  Saltati: 2
+[2026-01-26T15:24:26.100Z] ❌ Errori: 0
+[2026-01-26T15:24:26.100Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T15:31:25.264Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T15:31:25.266Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T15:31:25.266Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T15:31:25.266Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T15:31:25.266Z] === REPORT FINALE ===
+[2026-01-26T15:31:25.266Z] ✅ Generati: 0
+[2026-01-26T15:31:25.267Z] ⏭️  Saltati: 2
+[2026-01-26T15:31:25.267Z] ❌ Errori: 0
+[2026-01-26T15:31:25.267Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T15:47:07.490Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T15:47:07.492Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T15:47:07.492Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T15:47:07.492Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T15:47:07.492Z] === REPORT FINALE ===
+[2026-01-26T15:47:07.492Z] ✅ Generati: 0
+[2026-01-26T15:47:07.493Z] ⏭️  Saltati: 2
+[2026-01-26T15:47:07.493Z] ❌ Errori: 0
+[2026-01-26T15:47:07.493Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T15:53:29.921Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T15:53:29.923Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T15:53:29.923Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T15:53:29.923Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T15:53:29.923Z] === REPORT FINALE ===
+[2026-01-26T15:53:29.923Z] ✅ Generati: 0
+[2026-01-26T15:53:29.923Z] ⏭️  Saltati: 2
+[2026-01-26T15:53:29.923Z] ❌ Errori: 0
+[2026-01-26T15:53:29.923Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T15:55:38.121Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T15:55:38.122Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T15:55:38.123Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T15:55:38.123Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T15:55:38.123Z] === REPORT FINALE ===
+[2026-01-26T15:55:38.123Z] ✅ Generati: 0
+[2026-01-26T15:55:38.123Z] ⏭️  Saltati: 2
+[2026-01-26T15:55:38.123Z] ❌ Errori: 0
+[2026-01-26T15:55:38.123Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T16:08:57.736Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T16:08:57.738Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T16:08:57.738Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T16:08:57.738Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T16:08:57.739Z] === REPORT FINALE ===
+[2026-01-26T16:08:57.739Z] ✅ Generati: 0
+[2026-01-26T16:08:57.739Z] ⏭️  Saltati: 2
+[2026-01-26T16:08:57.739Z] ❌ Errori: 0
+[2026-01-26T16:08:57.739Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T16:17:06.170Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T16:17:06.172Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T16:17:06.173Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T16:17:06.173Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T16:17:06.173Z] === REPORT FINALE ===
+[2026-01-26T16:17:06.173Z] ✅ Generati: 0
+[2026-01-26T16:17:06.173Z] ⏭️  Saltati: 2
+[2026-01-26T16:17:06.173Z] ❌ Errori: 0
+[2026-01-26T16:17:06.173Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T16:22:51.002Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T16:22:51.004Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T16:22:51.004Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T16:22:51.004Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T16:22:51.004Z] === REPORT FINALE ===
+[2026-01-26T16:22:51.004Z] ✅ Generati: 0
+[2026-01-26T16:22:51.004Z] ⏭️  Saltati: 2
+[2026-01-26T16:22:51.004Z] ❌ Errori: 0
+[2026-01-26T16:22:51.004Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T16:34:45.135Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T16:34:45.136Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T16:34:45.137Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T16:34:45.137Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T16:34:45.137Z] === REPORT FINALE ===
+[2026-01-26T16:34:45.137Z] ✅ Generati: 0
+[2026-01-26T16:34:45.137Z] ⏭️  Saltati: 2
+[2026-01-26T16:34:45.137Z] ❌ Errori: 0
+[2026-01-26T16:34:45.137Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T16:43:34.880Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T16:43:34.882Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T16:43:34.883Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T16:43:34.883Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T16:43:34.883Z] === REPORT FINALE ===
+[2026-01-26T16:43:34.883Z] ✅ Generati: 0
+[2026-01-26T16:43:34.883Z] ⏭️  Saltati: 2
+[2026-01-26T16:43:34.883Z] ❌ Errori: 0
+[2026-01-26T16:43:34.883Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T17:20:44.859Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T17:20:44.861Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T17:20:44.861Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T17:20:44.861Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T17:20:44.862Z] === REPORT FINALE ===
+[2026-01-26T17:20:44.862Z] ✅ Generati: 0
+[2026-01-26T17:20:44.862Z] ⏭️  Saltati: 2
+[2026-01-26T17:20:44.862Z] ❌ Errori: 0
+[2026-01-26T17:20:44.862Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T17:23:01.068Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T17:23:01.069Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T17:23:01.070Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T17:23:01.070Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T17:23:01.070Z] === REPORT FINALE ===
+[2026-01-26T17:23:01.070Z] ✅ Generati: 0
+[2026-01-26T17:23:01.070Z] ⏭️  Saltati: 2
+[2026-01-26T17:23:01.070Z] ❌ Errori: 0
+[2026-01-26T17:23:01.070Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T17:31:52.912Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T17:31:52.913Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T17:31:52.914Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T17:31:52.914Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T17:31:52.914Z] === REPORT FINALE ===
+[2026-01-26T17:31:52.914Z] ✅ Generati: 0
+[2026-01-26T17:31:52.914Z] ⏭️  Saltati: 2
+[2026-01-26T17:31:52.914Z] ❌ Errori: 0
+[2026-01-26T17:31:52.914Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T17:39:09.688Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T17:39:09.689Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T17:39:09.689Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T17:39:09.689Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T17:39:09.689Z] === REPORT FINALE ===
+[2026-01-26T17:39:09.689Z] ✅ Generati: 0
+[2026-01-26T17:39:09.689Z] ⏭️  Saltati: 2
+[2026-01-26T17:39:09.690Z] ❌ Errori: 0
+[2026-01-26T17:39:09.690Z] === GLOBAL CSS BUILD END ===
+[2026-01-26T17:45:42.927Z] === GLOBAL CSS BUILD START ===
+[2026-01-26T17:45:42.929Z] 🔍 Trovati 2 tenants. Avvio elaborazione parallela...
+[2026-01-26T17:45:42.929Z] ⏭️  SKIP [default]: style.css già esistente.
+[2026-01-26T17:45:42.929Z] ⚠️  SKIP [trinacria]: input.css non trovato.
+[2026-01-26T17:45:42.929Z] === REPORT FINALE ===
+[2026-01-26T17:45:42.930Z] ✅ Generati: 0
+[2026-01-26T17:45:42.930Z] ⏭️  Saltati: 2
+[2026-01-26T17:45:42.930Z] ❌ Errori: 0
+[2026-01-26T17:45:42.930Z] === GLOBAL CSS BUILD END ===

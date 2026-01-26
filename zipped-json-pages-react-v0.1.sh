@@ -5,25 +5,28 @@
 # ==========================================
 
 # Cartella di destinazione per gli zip
-DEST_DIR="$HOME/zip-json-pages0.1.0"
+DEST_DIR="$HOME/zip-json-pages0.1.1-uistyle"
 
 # LISTA DEI TARGET: Inserisci qui file o cartelle che vuoi includere.
 # Puoi mettere percorsi specifici (es. "apps/backend/src") o file singoli.
 TARGETS=(
+    #root 
     "package.json"
-    "nx.json"
-    "jest.config.ts"
-    "eslint.config.mjs"
-    "jest.preset.js"
     "tsconfig.base.json"
-    "apps/backend"       # Include tutto il sorgente backend
-    
-    "apps/public-site"      # Include tutto il sorgente frontend
-    "libs"                   # Include la lib UI
-    
-    "data-store/system" 
-        
+    "nx.json"
+    "eslint.config.mjs"
+    "jest.config.ts"
+    "jest.preset.js"
+
+    #root
+    "data-store/system"
     "data-store/tenants/default"
+   
+    #root
+    "libs/"  
+    #root
+    "apps/public-site" 
+   
     # Aggiungi qui altri percorsi se necessario
 )
 
@@ -91,7 +94,7 @@ echo "📦 Creazione archivi (Max 10 file ciascuno)..."
 for chunk in "$DEST_DIR"/chunk_*; do
     # Genera nome progressivo (part-01.zip, part-02.zip...)
     suffix=$(printf "%02d" $((count + 1)))
-    zip_name="zip-json-pages0.1.0-${suffix}.zip"
+    zip_name="zip-json-pages0.1.1-uistyle-${suffix}.zip"
     
     # Crea lo zip leggendo la lista dal chunk corrente
     cat "$chunk" | zip -q "$DEST_DIR/$zip_name" -@
